@@ -228,9 +228,14 @@ function resultRecorder(){
 
 //start of login/create user functions//
 function logBox() {
+    if (youradj.length == 0){
     btnDisabler('login', 'playcomp', 'play2p', 'viewlead');
     displayNone('newuser', 'leaderdiv', 'leaderboard', 'leaderkey');     
     document.getElementById("logindiv").style.display = 'inline-block';
+    } else {
+        newGame();
+        logBox();
+    }
 }
 
 function createUser(){
