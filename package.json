@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "index.js",
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest ."
   },
   "repository": {
     "type": "git",
@@ -44,6 +44,7 @@
     "node": "16.x"
   },
   "devDependencies": {
+    "jest": "^27.3.1",
     "supertest": "^6.1.6"
   }
 }
