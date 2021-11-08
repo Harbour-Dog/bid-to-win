@@ -1,10 +1,9 @@
 name: Node.js CI
-
 env:
-  MYSQL_HOST: localhost
-  MYSQL_USER: root
-  MYSQL_PASSWORD: password
-  MYSQL_DATABASE: database
+  HOST: localhost
+  USER: root
+  PASSWORD: password
+  DATABASE: database
   PORT: 3000
   NODE_ENV: test
 
@@ -25,15 +24,6 @@ jobs:
         with:
           node-version: 14.x
           cache: "npm"
-      - name: Setup MYSQL
-        env:
-          host port: ${{ env.PORT }}
-          container port: ${{ env.PORT }}
-          mysql host: ${{ env.MYSQL_HOST }}
-          mysql root password: ${{ env.MYSQL_PASSWORD }}
-          mysql database: ${{ env.MYSQL_DATABASE }}
-          mysql user: ${{ env.MYSQL_USER }}
-          mysql password: ${{ env.MYSQL_PASSWORD }}
-        run: 'npm ci'
+      - run: npm ci
       - run: npm test
       - run: npm run build
