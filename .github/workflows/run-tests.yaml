@@ -29,7 +29,7 @@ jobs:
         env:
           host port: ${{ env.PORT }}
           container port: ${{ env.PORT }}
-          mysql version: 'latest'
+          mysql host: ${{ env.MYSQL_HOST }}
           mysql root password: ${{ env.MYSQL_PASSWORD }}
           mysql database: ${{ env.MYSQL_DATABASE }}
           mysql user: ${{ env.MYSQL_USER }}
