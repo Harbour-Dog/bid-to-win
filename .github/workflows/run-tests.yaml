@@ -1,9 +1,9 @@
 name: Node.js CI
 env:
-  HOST: localhost
-  USER: root
-  PASSWORD: password
-  DATABASE: database
+  HOST: test_host
+  USER: test_user
+  PASSWORD: test_password
+  DATABASE: test_database
   PORT: 3000
   NODE_ENV: test
 
