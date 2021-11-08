@@ -5,7 +5,7 @@ env:
   PASSWORD: password
   DATABASE: database
   PORT: 3306
-  BASE_URL: localhost
+  BASE_URL: http://localhost:3000
   NODE_ENV: test
 
 on:
