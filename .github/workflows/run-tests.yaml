@@ -18,6 +18,14 @@ jobs:
   api-tests:
     runs-on: ubuntu-latest
 
+    env:
+      MYSQL_HOST: ${{ env.MYSQL_HOST }}
+      MYSQL_USER: ${{ env.MYSQL_USER }}
+      MYSQL_PASSWORD: ${{ env.MYSQL_PASSWORD }}
+      MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_PASSWORD }}
+      MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
+      PORT: ${{ env.PORT }}
+
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
