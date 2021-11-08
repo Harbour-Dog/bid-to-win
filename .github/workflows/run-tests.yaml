@@ -18,14 +18,6 @@ jobs:
   api-tests:
     runs-on: ubuntu-latest
 
-    mysql-master:
-      env:
-        MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
-        MYSQL-USER: ${{ env.MYSQL_USER }}
-        MYSQL_PASSWORD: ${{ env.MYSQL_PASSWORD }}
-        MYSQL_ROOT_PASSWORD: ${{ env.MYQL_PASSWORD }}
-        PORT: ${{ env.PORT }}
-
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
@@ -35,4 +27,4 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm test
-      #- run: npm run build
+      - run: npm run build
