@@ -1,6 +1,6 @@
 name: Node.js CI
 env:
-  HOST: test_host
+  HOST: localhost
   USER: test_user
   PASSWORD: test_password
   DATABASE: test_database
