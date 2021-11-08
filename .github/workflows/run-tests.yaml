@@ -1,5 +1,13 @@
 name: Node.js CI
 
+env:
+  MYSQL_HOST: localhost
+  MYSQL_USER: root
+  MYSQL_PASSWORD: password
+  MYSQL_DATABASE: database
+  PORT: 3000
+  NODE_ENV: test
+
 on:
   push:
     branches: [main]
@@ -9,6 +17,14 @@ on:
 jobs:
   api-tests:
     runs-on: ubuntu-latest
+
+    mysql-master:
+      env:
+        MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
+        MYSQL-USER: ${{ env.MYSQL_USER }}
+        MYSQL_PASSWORD: ${{ env.MYSQL_PASSWORD }}
+        MYSQL_ROOT_PASSWORD: ${{ env.MYQL_PASSWORD }}
+        PORT: ${{ env.PORT }}
 
     steps:
       - uses: actions/checkout@v2
