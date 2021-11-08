@@ -34,7 +34,7 @@ jobs:
           mysql database: ${{ env.MYSQL_DATABASE }}
           mysql user: ${{ env.MYSQL_USER }}
           mysql password: ${{ env.MYSQL_PASSWORD }}
-        runs: 'docker'
+        run: 'docker'
 
       - run: npm ci
       - run: npm test
