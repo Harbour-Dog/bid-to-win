@@ -33,15 +33,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //routes handlers
-//const userController = require('./controllers/user.js');
 const userstats = require('./routes/userstats.js');
 const user = require('./routes/user.js');
-// const userstatsController = require('./controllers/userstats.js');
 app.use('/user_stats', userstats); //deals with fetching user and leaderboard stats for display
 app.use('/user', user); //deals with logging in and updating user stats during games
 console.log('in '+app.settings.env+' mode');
 
-//for supertest to work, this has to be moved and replaced with module.exports = app?
 app.listen(process.env.PORT || 31801, () => {
     console.log('Listening on Port '+ process.env.PORT);
 });
