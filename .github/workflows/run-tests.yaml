@@ -4,7 +4,7 @@ env:
   USER: root
   PASSWORD: password
   DATABASE: database
-  PORT: 3000
+  PORT: 3306
   NODE_ENV: test
 
 on:
