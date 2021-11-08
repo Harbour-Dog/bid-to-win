@@ -26,15 +26,15 @@ jobs:
           node-version: 14.x
           cache: "npm"
       - name: Setup MYSQL
-          inputs:
-            host port: ${{ env.PORT }}
-            container port: ${{ env.PORT }}
-            mysql version: 'latest'
-            mysql root password: ${{ env.MYSQL_PASSWORD }}
-            mysql database: ${{ env.MYSQL_DATABASE }}
-            mysql user: ${{ env.MYSQL_USER }}
-            mysql password: ${{ env.MYSQL_PASSWORD }}
-          runs: 'docker'
+        inputs:
+          host port: ${{ env.PORT }}
+          container port: ${{ env.PORT }}
+          mysql version: 'latest'
+          mysql root password: ${{ env.MYSQL_PASSWORD }}
+          mysql database: ${{ env.MYSQL_DATABASE }}
+          mysql user: ${{ env.MYSQL_USER }}
+          mysql password: ${{ env.MYSQL_PASSWORD }}
+        runs: 'docker'
 
       - run: npm ci
       - run: npm test
