@@ -1,12 +1,12 @@
 const express = require('express');
 
+require('dotenv').config();
 const app = express();
 const router = express.Router();
 router.use(express.json());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 const mysql = require('mysql');
-require('dotenv').config();
 
 const db = mysql.createPool({
     host: process.env.HOST,
