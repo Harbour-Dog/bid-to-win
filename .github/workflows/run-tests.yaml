@@ -18,4 +18,5 @@ jobs:
           node-version: 14.x
           cache: "npm"
       - run: npm ci
-      # - run: npm test
+      - run: npm test
+      #- run: npm run build

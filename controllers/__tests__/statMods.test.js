@@ -5,10 +5,6 @@ const request = supertest(app);
 const dbFunction = require('../../testFunctions.js');
 require('dotenv').config();
 
-let startArray = [];
-let winArray = [];
-let lossArray = [];
-let tieArray = [];
 let addUsers = "INSERT INTO test_stats (Username, GP, Wins, Losses, Ties, Abandons, WinPerc, Password)" + 
                 "VALUES ('userGame_Start', 0, 0, 0, 0, 0, 0, 'passGame_Start')," +
                 "('userGame_Win', 10, 1, 0, 0, 9, 10, 'passGame_Win')," +

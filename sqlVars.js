@@ -14,8 +14,9 @@ const createTable = "CREATE TABLE test_stats (" +
                         "UNIQUE KEY `ID_UNIQUE` (`ID`)," +
                         "UNIQUE KEY `Username_UNIQUE` (`Username`)" +
                         ") ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;";
-const renameTable = "RENAME TABLE user_stats TO user_stats_original, test_stats TO user_stats;";
+const renameOrgTable = "RENAME TABLE user_stats TO user_stats_original;";
+const renameTestTable = "RENAME TABLE test_stats TO user_stats;";
 const dropTable = 'DROP TABLE user_stats;';
 const resetDB = 'RENAME TABLE user_stats_original TO user_stats;';
 
-module.exports = {createTable, renameTable, dropTable, resetDB};
+module.exports = {createTable, renameOrgTable, renameTestTable, dropTable, resetDB};

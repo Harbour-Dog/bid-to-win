@@ -5,7 +5,6 @@ const request = supertest(app);
 const dbFunction = require('../../testFunctions.js');
 require('dotenv').config();
 
-let objArray = [];
 let addUsers = "INSERT INTO test_stats (Username, GP, Wins, Losses, Ties, Abandons, WinPerc, Password)" + 
                         "VALUES ('4th', 20, 5, 5, 5, 5, 33, 'password')," + 
                         "('8th', 0, 0, 0, 0, 0, 0, 'password')," +
@@ -25,6 +24,7 @@ describe('userstats/1.0.0/leaderboard  -  Requesting leaderboard retrieval', () 
         const response = await request.get('/userstats/1.0.0/leaderboard').send();
         expect(response.statusCode).toBe(200);
         expect(response.type).toEqual('application/json');
+        let objArray = [];
         let r = JSON.parse(response.text);
         for (i = 0; i < 8; i++){
             objArray.push(r.data[i].Username);

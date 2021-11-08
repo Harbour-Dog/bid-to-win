@@ -23,7 +23,7 @@ const queryDatabase = (query) => new Promise ((resolve, reject) => {
 })
 
 async function setup(addUsers){ 
-    await Promise.all([sqlVar.createTable, addUsers, sqlVar.renameTable].map(queryDatabase));
+    await Promise.all([sqlVar.createTable, addUsers, sqlVar.renameOrgTable, sqlVar.renameTestTable].map(queryDatabase));
 }
 
 async function breakdown(){
