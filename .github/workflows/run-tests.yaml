@@ -14,13 +14,21 @@ on:
   pull_request:
     branches: [main]
 
+services:
+    mysql:
+        image: mysql:8.0
+        env:
+            MYSQL_ALLOW_EMPTY_PASSWORD: yes
+            MYSQL_DATABASE: test_db
+        ports:
+            - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
 jobs:
   api-tests:
     runs-on: ubuntu-latest
 
     steps:
-      - name: MYSQL setup
-          run: mysql -e 'CREATE DATABASE ${{ env.DATABASE }};' -u${{ env.USER }} -p${{ env.PASSWORD }}
       - uses: actions/checkout@v2
       - name: Use Node.js
         uses: actions/setup-node@v2
