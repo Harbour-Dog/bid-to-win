@@ -36,5 +36,8 @@ jobs:
           node-version: 14.x
           cache: "npm"
       - run: npm ci
-      - run: npm test
+      - name: Run tests
+        run: npm test
+        env:
+          PORT: ${{ env.PORT }}
       - run: npm run build
