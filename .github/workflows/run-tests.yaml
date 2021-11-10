@@ -2,10 +2,10 @@ name: Node.js CI
 env:
   HOST: localhost
   USER: root
-  PASSWORD: root
+  PASSWORD: password
   DATABASE: test_db
-  PORT: 3306
-  BASE_URL: http://localhost:3306
+  PORT: 3000
+  BASE_URL: http://localhost:3000
   NODE_ENV: test
 
 on:
@@ -22,13 +22,17 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-            MYSQL_ALLOW_EMPTY_PASSWORD: yes
+            MYSQL_ROOT_PASSWORD: password
             MYSQL_DATABASE: test_db
         ports:
-            - 3306
+            - 3000:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
+      - name: create MYSQL connection
+        run: sudo apt-get install -y mysql-client
+          mysql --host 127.0.0.1 --port 32574 -uroot -ppassword -e
+          "SHOW DATABASES"
       - uses: actions/checkout@v2
       - name: Use Node.js
         uses: actions/setup-node@v2
