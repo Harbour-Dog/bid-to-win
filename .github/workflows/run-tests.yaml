@@ -4,8 +4,8 @@ env:
   USER: root
   PASSWORD: root
   DATABASE: test_db
-  PORT: 3000
-  BASE_URL: http://localhost:3000
+  PORT: 3306
+  BASE_URL: http://localhost:3306
   NODE_ENV: test
 
 on:
