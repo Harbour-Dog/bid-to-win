@@ -2,9 +2,9 @@ name: Node.js CI
 env:
   HOST: localhost
   USER: root
-  PASSWORD: password
-  DATABASE: leaderboard
-  PORT: 3000
+  PASSWORD: root
+  DATABASE: test_db
+  PORT: 3306
   BASE_URL: http://localhost:3000
   NODE_ENV: test
 
