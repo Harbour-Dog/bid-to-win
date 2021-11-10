@@ -20,8 +20,7 @@ jobs:
 
     steps:
       - name: MYSQL setup
-          run: sudo /etc/init.d/mysql start
-              mysql -e 'CREATE DATABASE ${{ env.DATABASE }};' -u${{ env.USER }} -p${{ env.PASSWORD }}
+          run: mysql -e 'CREATE DATABASE ${{ env.DATABASE }};' -u${{ env.USER }} -p${{ env.PASSWORD }}
       - uses: actions/checkout@v2
       - name: Use Node.js
         uses: actions/setup-node@v2
