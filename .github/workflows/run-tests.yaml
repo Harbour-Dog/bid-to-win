@@ -25,6 +25,9 @@ jobs:
         with:
           node-version: 14.x
           cache: "npm"
+      - name: MYSQL setup
+          run: sudo /etc/init.d/mysql start
+              mysql -e 'CREATE DATABASE ${{ env.DATABASE }};' -u${{ env.USER }} -p${{ env.PASSWORD }}
       - run: npm ci
       - run: npm test
       - run: npm run build
