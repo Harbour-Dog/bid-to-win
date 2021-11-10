@@ -1062,6 +1062,7 @@ function stratNorm(){
     for (i = 0; i < yourcards.length; i++){
         ysum += yourcards[i];
     }
+    
     compavg = csum / compcards.length;
     youravg = ysum / yourcards.length;
 
