@@ -8,7 +8,7 @@
     "start": "node index.js",
     "test": "jest .",
     "build": "webpack --mode=production",
-    "dbtester": "dbtester.js"
+    "run": "dbtester.js"
   },
   "repository": {
     "type": "git",
