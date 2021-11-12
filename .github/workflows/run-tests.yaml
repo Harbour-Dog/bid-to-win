@@ -25,13 +25,13 @@ jobs:
             MYSQL_ROOT_PASSWORD: password
             MYSQL_DATABASE: test_db
         ports:
-            - 3000:3306
+            - 3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: create MYSQL connection
         run: sudo apt-get install -y mysql-client
-          mysql "CREATE DATABASE" --host localhost --port 3000 -uroot -ppassword -e
+          mysql --host localhost --port 3000 -uroot -ppassword -e
           "SHOW DATABASES"
       - uses: actions/checkout@v2
       - name: Use Node.js
