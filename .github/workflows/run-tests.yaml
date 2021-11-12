@@ -44,8 +44,8 @@ jobs:
       - name: Webpack bundler
         run: npm run build
       - name: MYSQL Setup
-        run: sudo apt-get -y install mysql-client
-               mysql --port 3306 --host localhost -utest_user -ppassword -e 
+        run: sudo choco install -y mysql-client
+               mysql --host localhost --port 3306 -utest_user -ppassword -e 
                "SHOW DATABASES"
       - name: Run tests
         run: npm test
