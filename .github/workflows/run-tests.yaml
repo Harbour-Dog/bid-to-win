@@ -1,12 +1,4 @@
 name: Node.js CI
-env:
-  MYSQL_HOST: localhost
-  MYSQL_USER: root
-  MYSQL_PASSWORD: password
-  MYSQL_DATABASE: test_db
-  PORT: 3000
-  MYSQL_BASE_URL: http://localhost:3000
-  NODE_ENV: test
 
 on:
   push:
@@ -17,6 +9,15 @@ on:
 jobs:
   api-tests:
     runs-on: ubuntu-latest
+
+    env:
+      MYSQL_HOST: localhost
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: test_db
+      PORT: 3000
+      MYSQL_BASE_URL: http://localhost:3000
+      NODE_ENV: test
 
     services:
       mysql:
