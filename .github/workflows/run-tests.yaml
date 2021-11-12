@@ -2,7 +2,7 @@ name: Node.js CI
 
 env:
   MYSQL_HOST: 127.0.0.1
-  MYSQL_USER: testuser
+  MYSQL_USER: ODBC
   MYSQL_PASSWORD: password
   MYSQL_DATABASE: testdb
   PORT: 3306
@@ -45,7 +45,7 @@ jobs:
         run: npm run build
       - name: MYSQL Setup
         run: sudo service mysql start
-               mysql --host 127.0.0.1 --port 3306 -utestuser -ppassword testdb -e
+               mysql --host 127.0.0.1 --port 3306 -uODBC -ppassword -e
       - name: Run tests
         run: npm test
         env:
