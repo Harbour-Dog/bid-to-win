@@ -13,6 +13,7 @@ const db = mysql.createConnection({
 
 //our generic query that we can map with an array of required queries for testing//
 const queryDatabase = (query) => new Promise ((resolve, reject) => {
+    console.log([host, user, password, database]);
     db.query(query, (err, res) => {
         if (err){
             reject(err)
