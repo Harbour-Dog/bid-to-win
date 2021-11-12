@@ -46,7 +46,6 @@ jobs:
       - name: MYSQL Setup
         run: sudo service mysql start
                mysql --host 127.0.0.1 --port 3306 -utest_user -ppassword -e 
-               "SHOW DATABASES"
       - name: Run tests
         run: npm test
         env:
