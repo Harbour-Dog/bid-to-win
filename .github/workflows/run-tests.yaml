@@ -30,7 +30,7 @@ jobs:
             MYSQL_HOST: ${{ env.MYSQL_HOST }}
             MYSQL_BASE_URL: ${{ env.MYSQL_BASE_URL }}
         ports:
-            - 3000:3306
+            - 3000
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
@@ -45,7 +45,7 @@ jobs:
         run: npm run build
       - name: MYSQL Setup
         run: sudo service mysql start
-               mysql --host localhost --port 3306 -utest_user -ppassword -e 
+               mysql --host localhost --port 3000 -utest_user -ppassword -e 
                "SHOW DATABASES"
       - name: Run tests
         run: npm test
