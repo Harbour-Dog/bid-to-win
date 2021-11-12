@@ -23,7 +23,7 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-            PASSWORD: ${{ env.Password}}
+            PASSWORD: ${{ env.PASSWORD}}
             ROOT_PASSWORD: ${{ env.PASSWORD }}
             DATABASE: ${{ env.DATABASE }}
             USER: ${{ env.USER }}
