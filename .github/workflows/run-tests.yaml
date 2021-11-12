@@ -41,7 +41,12 @@ jobs:
           node-version: 14.x
           cache: "npm"
       - run: npm ci
-      - run: npm run build
+      - name: Webpack bundler
+        run: npm run build
+      - name: MYQL Setup
+        run: sudo apt-get install -y mysql-client
+               mysql --host localhost --port 3306 -utest_user -ppassword -e 
+               "SHOW DATABASES"
       - name: Run tests
         run: npm test
         env:
