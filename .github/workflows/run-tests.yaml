@@ -44,7 +44,8 @@ jobs:
       - name: Webpack bundler
         run: npm run build
       - name: MYSQL Setup
-        run: mysql --host localhost --port 3306 -utest_user -ppassword -e 
+        run: sudo service mysql start
+               mysql --host localhost --port 3306 -utest_user -ppassword -e 
                "SHOW DATABASES"
       - name: Run tests
         run: npm test
