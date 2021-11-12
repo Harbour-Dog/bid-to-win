@@ -6,7 +6,7 @@ env:
   MYSQL_PASSWORD: password
   MYSQL_DATABASE: test_db
   PORT: 3306
-  MYSQL_BASE_URL: http://127.0.0.1:3306
+  MYSQL_BASE_URL: 127.0.0.1:3306
   NODE_ENV: test
 
 on:
