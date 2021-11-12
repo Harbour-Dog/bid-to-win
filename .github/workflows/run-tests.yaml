@@ -1,5 +1,14 @@
 name: Node.js CI
 
+env:
+  MYSQL_HOST: localhost
+  MYSQL_USER: root
+  MYSQL_PASSWORD: 
+  MYSQL_DATABASE: test_db
+  PORT: 3000
+  MYSQL_BASE_URL: http://localhost:3000
+  NODE_ENV: test
+
 on:
   push:
     branches: [main]
@@ -10,15 +19,6 @@ jobs:
   api-tests:
     runs-on: ubuntu-latest
 
-    env:
-      MYSQL_HOST: localhost
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
-      MYSQL_DATABASE: test_db
-      PORT: 3000
-      MYSQL_BASE_URL: http://localhost:3000
-      NODE_ENV: test
-
     services:
       mysql:
         image: mysql:8.0
@@ -28,6 +28,7 @@ jobs:
             MYSQL_USER: ${{ env.MYSQL_USER }}
             MYSQL_HOST: ${{ env.MYSQL_HOST }}
             MYSQL_BASE_URL: ${{ env.MYSQL_BASE_URL }}
+            MYSQL_PORT: ${{  env.MYSQL_PORT }}
         ports:
             - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
