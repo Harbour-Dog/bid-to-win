@@ -7,7 +7,8 @@
     "dev": "index.js",
     "start": "node index.js",
     "test": "jest .",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "dbtester": "dbtester.js"
   },
   "repository": {
     "type": "git",
