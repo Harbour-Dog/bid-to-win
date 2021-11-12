@@ -2,9 +2,9 @@ name: Node.js CI
 
 env:
   MYSQL_HOST: 127.0.0.1
-  MYSQL_USER: ODBC
+  MYSQL_USER: db_user
   MYSQL_PASSWORD: password
-  MYSQL_DATABASE: testdb
+  MYSQL_DATABASE: db_test
   PORT: 3306
   MYSQL_BASE_URL: 127.0.0.1:3306
   NODE_ENV: test
@@ -45,7 +45,10 @@ jobs:
         run: npm run build
       - name: MYSQL Setup
         run: sudo service mysql start
-               mysql --host 127.0.0.1 --port 3306 -uODBC -ppassword -e
+              mysql -uroot
+              GRANT ALL PRIVILEGES ON *.* TO 'db_user'@'localhost' IDENTIFIED BY 'password';
+               mysql --host 127.0.0.1 --port 3306 -udb_user -ppassword -e
+               "CREATE DATABASE user_stats"
       - name: Run tests
         run: npm test
         env:
