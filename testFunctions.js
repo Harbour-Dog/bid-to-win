@@ -5,10 +5,10 @@ const sqlVar = require('./sqlVars.js');
 require('dotenv').config();
 
 const db = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE
 });
 
 //our generic query that we can map with an array of required queries for testing//
