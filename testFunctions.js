@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const app = require('./apptest.js');
 const sqlVar = require('./sqlVars.js');
 require('dotenv').config();

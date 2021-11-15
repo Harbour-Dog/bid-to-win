@@ -6,7 +6,7 @@ const router = express.Router();
 router.use(express.json());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const db = mysql.createPool({
     host: process.env.MYSQL_HOST,
