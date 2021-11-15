@@ -28,12 +28,12 @@ jobs:
       with:
         node-version: 14.x
         cache: "npm"
-      - run: npm ci
-      - name: MYSQL Setup
-        run: mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e
-               "GRANT ALL PRIVILEGES ON testdb.* TO 'root'@'127.0.0.1'"
-      - name: Run tests
-        run: npm test
-        env:
-          MYSQL_USER: root
-          PORT: ${{ env.PORT }}
+    - run: npm ci
+    - name: MYSQL Setup
+      run: mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e
+              "GRANT ALL PRIVILEGES ON testdb.* TO 'root'@'127.0.0.1'"
+    - name: Run tests
+      run: npm test
+      env:
+        MYSQL_USER: root
+        PORT: ${{ env.PORT }}
