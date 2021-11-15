@@ -2,7 +2,6 @@ name: Node.js CI
 
 env:
   MYSQL_HOST: 127.0.0.1
-  MYSQL_USER: testuser
   MYSQL_PASSWORD: password
   MYSQL_DATABASE: testdb
   PORT: 3306
@@ -26,7 +25,6 @@ jobs:
             MYSQL_PASSWORD: ${{ env.MYSQL_PASSWORD}}
             MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_PASSWORD }}
             MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
-            MYSQL_USER: ${{ env.MYSQL_USER }}
             MYSQL_HOST: ${{ env.MYSQL_HOST }}
             MYSQL_BASE_URL: ${{ env.MYSQL_BASE_URL }}
         ports:
@@ -45,12 +43,9 @@ jobs:
         run: npm run build
       - name: MYSQL Setup
         run: sudo service mysql start
-               mysql --host 127.0.0.1 --port 3306 -utestuser -ppassword -e
-      - name: Verify MySQL connection
-        run: while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
-             sleep 1
-             done 
+               mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e
       - name: Run tests
         run: npm test
         env:
+          MYSQL_USER: root
           PORT: ${{ env.PORT }}
