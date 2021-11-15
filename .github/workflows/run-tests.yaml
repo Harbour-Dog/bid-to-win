@@ -18,16 +18,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-  - uses: mirromutth/mysql-action@v1.1
-      with:
-    mysql database: 'testdb'
-    mysql root password: 'password'
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v2
+    - uses: mirromutth/mysql-action@v1.1
         with:
-          node-version: 14.x
-          cache: "npm"
+          mysql database: 'testdb'
+          mysql root password: 'password'
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+        cache: "npm"
       - run: npm ci
       - name: MYSQL Setup
         run: mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e
