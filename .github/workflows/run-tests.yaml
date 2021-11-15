@@ -46,6 +46,11 @@ jobs:
       - name: MYSQL Setup
         run: sudo service mysql start
                mysql --host 127.0.0.1 --port 3306 -utestuser -ppassword -e
+      - name: Verify MySQL connection
+        run: |
+          while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
+            sleep 1
+          done
       - name: Run tests
         run: npm test
         env:
