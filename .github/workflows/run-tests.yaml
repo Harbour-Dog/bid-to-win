@@ -19,9 +19,9 @@ jobs:
 
     steps:
     - uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql database: 'testdb'
-          mysql root password: 'password'
+      with:
+        mysql database: 'testdb'
+        mysql root password: 'password'
     - uses: actions/checkout@v2
     - name: Use Node.js
       uses: actions/setup-node@v2
