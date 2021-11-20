@@ -23,7 +23,11 @@ const queryDatabase = (query) => new Promise ((resolve, reject) => {
 })
 
 async function setup(addUsers){ 
-    await Promise.all([sqlVar.createTable, addUsers, sqlVar.renameOrgTable, sqlVar.renameTestTable].map(queryDatabase));
+    if (process.env.MYSQL_DATABASE === 'testdb'){
+        await Promise.all([sqlVar.createBaseTable, sqlVar.createTable, addUsers, sqlVar.renameOrgTable, sqlVar.renameTestTable].map(queryDatabase));
+    } else {
+        await Promise.all([sqlVar.createTable, addUsers, sqlVar.renameOrgTable, sqlVar.renameTestTable].map(queryDatabase));
+    }    
 }
 
 async function breakdown(){
