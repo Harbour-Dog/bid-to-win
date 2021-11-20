@@ -20,6 +20,10 @@ describe('userstats/1.0.0/leaderboard  -  Requesting leaderboard retrieval', () 
         await dbFunction.setup(addUsers);    
     });
 
+    afterAll(async () => {
+        await dbFunction.breakdown();
+    }); 
+
     test('Returns 200 status, and json object with correctly ordered leaderboard', async () => {
         const response = await request.get('/userstats/1.0.0/leaderboard').send();
         expect(response.statusCode).toBe(200);
@@ -30,9 +34,5 @@ describe('userstats/1.0.0/leaderboard  -  Requesting leaderboard retrieval', () 
             objArray.push(r.data[i].Username);
         }
         expect(objArray).toEqual(['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th']);
-    })
-
-    afterAll(async () => {
-        await dbFunction.breakdown();
-    });    
+    })   
 })
