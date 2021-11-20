@@ -24,7 +24,8 @@ const queryDatabase = (query) => new Promise ((resolve, reject) => {
 })
 
 async function setup(addUsers){
-    ciCount++ 
+    ciCount++
+    console.log(ciCount); 
     if (process.env.MYSQL_DATABASE === 'testdb' && ciCount == 1){
         await Promise.all([sqlVar.createBaseTable, sqlVar.createTable, addUsers, sqlVar.renameOrgTable, sqlVar.renameTestTable].map(queryDatabase));
     } else {
