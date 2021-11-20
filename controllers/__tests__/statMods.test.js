@@ -5,12 +5,6 @@ const request = supertest(app);
 const dbFunction = require('../../testFunctions.js');
 require('dotenv').config();
 
-console.log(process.env.MYSQL_BASE_URL);
-console.log(process.env.PORT);
-console.log(process.env.MYSQL_HOST);
-console.log(process.env.MYSQL_PASSWORD);
-console.log(process.env.MYSQL_USER);
-
 let addUsers = "INSERT INTO test_stats (Username, GP, Wins, Losses, Ties, Abandons, WinPerc, Password)" + 
                 "VALUES ('userGame_Start', 0, 0, 0, 0, 0, 0, 'passGame_Start')," +
                 "('userGame_Win', 10, 1, 0, 0, 9, 10, 'passGame_Win')," +
