@@ -3,7 +3,6 @@ const mysql = require('mysql2');
 const app = require('./apptest.js');
 const sqlVar = require('./sqlVars.js');
 require('dotenv').config();
-ciCount = 0;
 
 const db = mysql.createConnection({
     host: process.env.MYSQL_HOST,
@@ -24,9 +23,7 @@ const queryDatabase = (query) => new Promise ((resolve, reject) => {
 })
 
 async function setup(addUsers){
-    ciCount++
-    console.log(ciCount); 
-    if (process.env.MYSQL_DATABASE === 'testdb' && ciCount == 1){
+    if (process.env.MYSQL_DATABASE === 'testdb'){
         await Promise.all([sqlVar.createBaseTable, sqlVar.createTable, addUsers, sqlVar.renameOrgTable, sqlVar.renameTestTable].map(queryDatabase));
     } else {
         await Promise.all([sqlVar.createTable, addUsers, sqlVar.renameOrgTable, sqlVar.renameTestTable].map(queryDatabase));
@@ -34,8 +31,12 @@ async function setup(addUsers){
 }
 
 async function breakdown(){
-    await Promise.all([sqlVar.dropTable, sqlVar.resetDB].map(queryDatabase));
-    db.end();
+    if (process.env.MYSQL_DATABASE === 'testdb'){
+        await Promise.all([sqlVar.dropBaseTable].map(queryDatabase));
+    } else {
+        await Promise.all([sqlVar.dropTable, sqlVar.resetDB].map(queryDatabase));
+        db.end();
+    }
 }
 
 module.exports = {setup, breakdown};

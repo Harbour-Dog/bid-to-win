@@ -32,5 +32,6 @@ const renameOrgTable = "RENAME TABLE user_stats TO user_stats_original;";
 const renameTestTable = "RENAME TABLE test_stats TO user_stats;";
 const dropTable = 'DROP TABLE user_stats;';
 const resetDB = 'RENAME TABLE user_stats_original TO user_stats;';
+const dropBaseTable = 'DROP TABLE user_stats_original;';
 
-module.exports = {createBaseTable, createTable, renameOrgTable, renameTestTable, dropTable, resetDB};
+module.exports = {createBaseTable, createTable, renameOrgTable, renameTestTable, dropTable, resetDB, dropBaseTable};
