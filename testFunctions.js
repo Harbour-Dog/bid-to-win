@@ -3,6 +3,7 @@ const mysql = require('mysql2');
 const app = require('./apptest.js');
 const sqlVar = require('./sqlVars.js');
 require('dotenv').config();
+ciCount = 0;
 
 const db = mysql.createConnection({
     host: process.env.MYSQL_HOST,
@@ -22,8 +23,9 @@ const queryDatabase = (query) => new Promise ((resolve, reject) => {
     })
 })
 
-async function setup(addUsers){ 
-    if (process.env.MYSQL_DATABASE === 'testdb'){
+async function setup(addUsers){
+    ciCount++ 
+    if (process.env.MYSQL_DATABASE === 'testdb' && ciCount == 1){
         await Promise.all([sqlVar.createBaseTable, sqlVar.createTable, addUsers, sqlVar.renameOrgTable, sqlVar.renameTestTable].map(queryDatabase));
     } else {
         await Promise.all([sqlVar.createTable, addUsers, sqlVar.renameOrgTable, sqlVar.renameTestTable].map(queryDatabase));
