@@ -34,6 +34,15 @@ describe('user/1.0.0/create  -  Attempting to create a user', () => {
         expect(response.type).toEqual('application/json');
         expect(JSON.parse(response.text).data[0].msg).toEqual("Username already exists");
     })
+    test('correctly, adds the user to the database,', async () => {
+        const response = await request.post('/user/1.0.0/create').send({
+            Username: 'userCreate',
+            Password: 'password'
+        })
+        expect(response.statusCode).toBe(400);
+        expect(response.type).toEqual('application/json');
+        expect(JSON.parse(response.text).data[0].msg).toEqual("Username already exists");
+    })
 })
 
 

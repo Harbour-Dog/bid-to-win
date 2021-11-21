@@ -18,7 +18,7 @@ describe('/user/1.0.0  -  During gameplay,', () => {
 
     afterAll(async () => {
         await dbFunction.breakdown();
-    })
+    });
 
     test('starting a new game should return a 200 status.', async () => {
         const response = await request.put('/user/1.0.0/game_started').send({
