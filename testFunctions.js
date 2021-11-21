@@ -33,6 +33,7 @@ async function setup(addUsers){
 async function breakdown(){
     if (process.env.MYSQL_DATABASE === 'testdb'){
         await Promise.all([sqlVar.dropBaseTable, sqlVar.dropTable].map(queryDatabase));
+        db.end();
     } else {
         await Promise.all([sqlVar.dropTable, sqlVar.resetDB].map(queryDatabase));
         db.end();
