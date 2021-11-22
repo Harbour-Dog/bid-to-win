@@ -1,8 +1,9 @@
 const express = require('express');
 const mysql = require('mysql2');
-const app = require('./apptest.js');
+// const app = require('./apptest.js');
 const sqlVar = require('./sqlVars.js');
 require('dotenv').config();
+// const db = app.db;
 
 const db = mysql.createConnection({
     host: process.env.MYSQL_HOST,
@@ -39,5 +40,9 @@ async function breakdown(){
         db.end();
     }
 }
+
+// async function dbEnd(){
+//     await db.end();
+// }
 
 module.exports = {setup, breakdown};

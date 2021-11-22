@@ -25,7 +25,8 @@ const login = (req, res, next) => {
                 if(result.length == 0){
                     return res.status(400).json({data: [{msg: "Username and password do not match"}]});
                 } else {    
-                    return res.status(200).json({Success: true, data: result});
+                    res.status(200).json({Success: true, data: result});
+                    db.end();
                 }
             });
         }
@@ -43,6 +44,7 @@ const create = (req, res, next) => {
             return res.status(400).json({data: [{msg: "Username already exists"}]});
         } else {
             res.status(200).json({Success: true});
+            db.end();
         }
     });
 }
@@ -62,6 +64,7 @@ const gameStart = (req, res, next) => {
                     return res.status(400).json({data: [{msg: "No login detected."}]});
                 } else {
                     res.status(200).json({Success: true});
+                    db.end();
                 }
             })
         }
@@ -83,6 +86,7 @@ const win = (req, res, next) => {
                     return res.status(400).json({data: [{msg: "No login detected."}]});
                 } else {
                     res.status(200).json({Success: true});
+                    db.end();
                 }
             })
         }
@@ -104,6 +108,7 @@ const loss = (req, res, next) => {
                     return res.status(400).json({data: [{msg: "No login detected."}]});
                 } else {
                     res.status(200).json({Success: true});
+                    db.end();
                 }
             })
         }
@@ -125,6 +130,7 @@ const tie = (req, res, next) => {
                     return res.status(400).json({data: [{msg: "No login detected."}]});
                 } else {
                     res.status(200).json({Success: true});
+                    db.end();
                 }
             })
         }

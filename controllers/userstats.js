@@ -20,7 +20,8 @@ const gpRank = (req, res, next) => {
         if(rows.length == 0) {
             return res.status(400).json({data: [{msg: "No login detected."}]});
         } else {
-            return res.status(200).json({Success: true, data: rows});
+            res.status(200).json({Success: true, data: rows});
+            db.end();
         }        
     });    
 }
@@ -34,7 +35,8 @@ const winsRank = (req, res, next) => {
         if(rows.length == 0) {
             return res.status(400).json({data: [{msg: "No login detected."}]});
         } else {
-            return res.status(200).json({Success: true, data: rows});
+            res.status(200).json({Success: true, data: rows});
+            db.end();
         }
     });    
 }
@@ -48,7 +50,8 @@ const winPercRank = (req, res, next) => {
         if(rows.length == 0) {
             return res.status(400).json({data: [{msg: "No login detected."}]});
         } else {
-            return res.status(200).json({Success: true, data: rows});
+            res.status(200).json({Success: true, data: rows});
+            db.end();
         }
     });    
 }
@@ -60,9 +63,10 @@ const leaderboard = (req, res, next) => {
     let sql = 'SELECT * FROM user_stats ORDER BY WinPerc DESC, GP DESC'
     db.query(sql, (err, rows) => {
         if(rows.length == undefined) {
-            res.status(400).json({data: [{msg: 'Not connected to database.'}]})
+            return res.status(400).json({data: [{msg: 'Not connected to database.'}]})
         } else {
             res.status(200).json({Success: true, data: rows});
+            db.end();
         }
     });
 }
