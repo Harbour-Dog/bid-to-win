@@ -1,9 +1,9 @@
 name: Node.js CI
 
 env:
-  MYSQL_HOST: localhost
-  MYSQL_PASSWORD: password
-  MYSQL_DATABASE: testdb
+  HOST: localhost
+  PASSWORD: password
+  DATABASE: testdb
   PORT: 3306
   NODE_ENV: test
 
@@ -33,5 +33,5 @@ jobs:
     - name: Run tests
       run: npm test
       env:
-        MYSQL_USER: root
+        USER: root
         PORT: ${{ env.PORT }}

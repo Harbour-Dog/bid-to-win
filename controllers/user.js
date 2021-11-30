@@ -9,10 +9,10 @@ require('dotenv').config();
 // @access          Private
 const login = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DATABASE
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
     });
 
     let sql1 = 'SELECT * FROM user_stats WHERE Username=? AND Password=?';
@@ -40,10 +40,10 @@ const login = (req, res, next) => {
 // @access          Private
 const create = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DATABASE
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
     });
 
     let sql = 'INSERT INTO user_stats (Username, GP, Wins, Losses, Ties, Abandons, WinPerc, Password)' + 
@@ -64,10 +64,10 @@ const create = (req, res, next) => {
 // @access          Public
 const gameStart = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DATABASE
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
     });
 
     let sql1 = 'SELECT * FROM user_stats WHERE Username=?';
@@ -95,10 +95,10 @@ const gameStart = (req, res, next) => {
 // @access          Public
 const win = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DATABASE
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
     });
 
     let sql1 = 'SELECT * FROM user_stats WHERE Username=?';
@@ -126,10 +126,10 @@ const win = (req, res, next) => {
 // @access          Public
 const loss = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DATABASE
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
     });
 
     let sql1 = 'SELECT * FROM user_stats WHERE Username=?';
@@ -157,10 +157,10 @@ const loss = (req, res, next) => {
 // @access          Public
 const tie = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DATABASE
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
     });
 
     let sql1 = 'SELECT * FROM user_stats WHERE Username=?';

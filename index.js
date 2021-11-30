@@ -16,13 +16,6 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static('./'));
 app.use(morgan('dev'));
 
-// const db = mysql.createPool({
-//     host: process.env.MYSQL_HOST,
-//     user: process.env.MYSQL_USER,
-//     password: process.env.MYSQL_PASSWORD,
-//     database: process.env.MYSQL_DATABASE
-// });
-
 app.use(session({
     secret: 'secret',
     saveUninitialized: true,
