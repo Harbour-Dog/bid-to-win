@@ -8,12 +8,12 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 const mysql = require('mysql2');
 
-// const db = mysql.createPool({
-//     host: process.env.MYSQL_HOST,
-//     user: process.env.MYSQL_USER,
-//     password: process.env.MYSQL_PASSWORD,
-//     database: process.env.MYSQL_DATABASE
-// });
+const db = mysql.createPool({
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE
+});
 
 const user = require('./routes/user.js');
 const userstats = require('./routes/userstats.js');
