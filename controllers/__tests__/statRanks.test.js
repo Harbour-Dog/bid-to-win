@@ -23,6 +23,8 @@ describe('userstats/1.0.0/gprank/:Username  -  Requesting the rank of the user',
         const response = await request.get('/userstats/1.0.0/gprank/:Username').query({Username: 'userGP_Rank'}).send();
         expect(response.statusCode).toBe(200);
         expect(response.type).toEqual('application/json');
+        let vvar = JSON.parse(response.text).data;
+        console.log(vvar);
         expect(JSON.parse(response.text).data[0].row_num).toEqual(3);
     })
     test('when it is the GP, when not logged in, returns a 400 status, corresponding message, and no user rank object.', async () => {
