@@ -36,7 +36,8 @@ let gp, wins, losses, ties, abs, winper;
 let lowspread = 0;
 
 // variable specific to not yet implemented Gauntlet Mode //
-let gauntlet, mod, adj;
+let gauntlet = 0;
+let mod, adj;
 
 // general functions that get called by a variety of others //
 function btnDisabler(){
@@ -177,6 +178,18 @@ function userTie(){
     });
 }
 
+function gauntletWin(){
+    console.log('gauntletWin');
+}
+
+function gauntletLoss(){
+    console.log('gauntletLoss');
+}
+
+function gauntletTie(){
+    console.log('gauntletTie');
+}
+
 function userButtons(){
     for (i = 0; i < buttons.length; i++){//enables all player buttons
         buttons[i].disabled = false;
@@ -217,13 +230,31 @@ function p2SecondBid(){
 }
 
 function resultRecorder(){
-    if(cpu == 1 && youradj.length == 10 && yourscore > oppscore && user != null){
+    if(cpu == 1 && yourscore > oppscore && user != null){
         userWin();    
     } else if(cpu == 1 && youradj.length == 10 && yourscore < oppscore && user != null){
         userLoss();
     } else if (cpu == 1 && youradj.length == 10 && yourscore == oppscore && user != null){
         userTie(); 
     } else {};
+}
+
+function gauntletRecorder(){
+    if(cpu == 1 && yourscore > oppscore && user != null){
+        gauntletWin();    
+    } else if(cpu == 1 && yourscore < oppscore && user != null){
+        gauntletLoss();
+    } else if (cpu == 1 && yourscore == oppscore && user != null){
+        gauntletTie(); 
+    } else {};
+
+    gauntletAdj();
+}
+
+function gauntletAdj(){
+    for (i = 0; i < cbuttons.length; i++){
+        cbutton[i].value = i + 1 +'.5';
+    }
 }
 
 //start of login/create user functions//
@@ -341,6 +372,7 @@ function loginFail(){
 function signOut(){
     location.reload();
 }
+
 //end of login/create user functions//
 function userStats(){
     displayNone('leaderdiv', 'leaderboard', 'leaderkey');
@@ -430,6 +462,10 @@ function normComp(){
 }
 
 function theGauntlet(){
+    gauntlet = 1;
+
+    document.getElementById('tally').innerHTML = 'Wins';
+
     btnDisabler('playcomp', 'play2p');
     btnEnabler('newround');
 }
@@ -437,7 +473,7 @@ function theGauntlet(){
 function play2p(){
     btnDisabler('playcomp', 'play2p');
     btnEnabler('newround');
-    alert("User data currently does not get recorded for two-player games.")
+    alert("User data currently does not get recorded for two-player games.");
 }
 
 function undo(){
@@ -608,9 +644,13 @@ function scoreReveal(){
     if (scorerev >= 4 && youradj.length != 10){    
         btnEnabler('newround');
     } else if (scorerev >= 4 && youradj.length == 10){
-        abs--
-        resultRecorder();        
+        abs--        
         btnEnabler('newgame');
+        if (gauntlet == 0){
+            resultRecorder();
+        } else {
+            gauntletRecorder();
+        }
     } else {
         setTimeout(scoreReveal, 800);
     };
@@ -3022,32 +3062,5 @@ function gameStateRouter(){
         stratRoundFour();
     } else {
         stratRoundFive();
-    }
-}
-
-//beginning of not yet implemented Gauntlet mode//
-
-
-function gauntlet5Adj(){
-    loop++;
-    document.getElementById("undo").disabled = false;
-    adj = gauntlet*2 + 0.5;
-
-    if (loop === 1){
-        document.getElementById("oppbid1").innerHTML = adj;
-        oppbid1 = adj;
-        document.getElementById("opp"+mod).disabled = true;
-        line3 = document.getElementById("opp"+mod);
-        oppadj.push(document.getElementById("opp"+mod));
-    } else {
-        document.getElementById("oppbid2").innerHTML = adj;
-        oppbid2 = adj;
-        line4 = document.getElementById("opp"+mod);
-        oppadj.push(document.getElementById("opp6"+mod));
-        document.getElementById("commit").disabled = false;
-
-        for (i = 0; i < buttons.length; i++){
-            cbuttons[i].disabled = true;
-        }
     }
 }
