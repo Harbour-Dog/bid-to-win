@@ -75,6 +75,32 @@ function greeting(){
     document.getElementById("rulebtn").style.color = "white";
 }
 
+function gameReset(){
+    loop = 0;
+    count = 0;
+    youradj = [];
+    oppadj = [];
+    yourcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    compcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    yourscore = 0;
+    oppscore = 0;
+    document.getElementById("scoreboard").innerHTML = "0 - 0";
+    document.getElementById("scoreboard").style.background = "lightgray";
+    document.getElementById("scoreboard").style.color = "black";
+    blankInnerHTML('oppbid1', 'oppbid2', 'yourbid1', 'yourbid2', 'trick1', 'trick2');
+    document.getElementById("trick1").style.backgroundColor = "white";
+    document.getElementById("trick2").style.backgroundColor = "white";
+    document.getElementById("trick1").style.color = "black";
+    document.getElementById("trick2").style.color = "black";
+    btnEnabler('newround');
+    btnDisabler('newgame');
+
+    for (i = 0; i < buttons.length; i++){
+        buttons[i].style.backgroundColor = "rgb(140, 140, 255)";
+        cbuttons[i].style.backgroundColor = "rgb(255, 140, 140)";
+    }
+}
+
 function userRanks(){
     statrank = ranknum.shift();
 
@@ -247,12 +273,10 @@ function gauntletRecorder(){
     } else if (cpu == 1 && yourscore == oppscore && user != null){
         gauntletTie(); 
     } else {};
-
-    gauntletAdj();
 }
 
 function gauntletAdj(){
-    for (i = 0; i < cbuttons.length; i++){
+    for (i = 0; i < cbuttons.length && i < yourscore; i++){
         cbuttons[i].value = i + 1 +'.5';
     }
 }
@@ -465,6 +489,7 @@ function theGauntlet(){
     gauntlet = 1;
 
     document.getElementById('tally').innerHTML = 'Wins';
+    document.getElementById('matchscore').innerHTML = 0;
 
     btnDisabler('playcomp', 'play2p');
     btnEnabler('newround');
@@ -656,9 +681,17 @@ function scoreReveal(){
     };
 }
 
+function newGameRoute(){
+    if (gauntlet == 0){
+        newGame();
+    } else {
+        newGauntlet()
+    }
+}
+
 function newGame(){
     if (yourscore > oppscore){
-        yourmatch = yourmatch + 1;
+        yourmatch++
         document.getElementById("matchscore").innerHTML = (yourmatch + " - " + oppmatch);
     } else if (yourscore < oppscore){
         oppmatch = oppmatch + 1;
@@ -676,29 +709,22 @@ function newGame(){
         document.getElementById("matchscore").style.color = "black";
     }
 
-    loop = 0;
-    count = 0;
-    youradj = [];
-    oppadj = [];
-    yourcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    compcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    yourscore = 0;
-    oppscore = 0;
-    document.getElementById("scoreboard").innerHTML = "0 - 0";
-    document.getElementById("scoreboard").style.background = "lightgray";
-    document.getElementById("scoreboard").style.color = "black";
-    blankInnerHTML('oppbid1', 'oppbid2', 'yourbid1', 'yourbid2', 'trick1', 'trick2');
-    document.getElementById("trick1").style.backgroundColor = "white";
-    document.getElementById("trick2").style.backgroundColor = "white";
-    document.getElementById("trick1").style.color = "black";
-    document.getElementById("trick2").style.color = "black";
-    btnEnabler('newround');
-    btnDisabler('newgame');
+    gameReset();
+}
 
-    for (i = 0; i < buttons.length; i++){
-        buttons[i].style.backgroundColor = "rgb(140, 140, 255)";
-        cbuttons[i].style.backgroundColor = "rgb(255, 140, 140)";
+function newGauntlet(){
+    if (yourscore > oppscore){
+        yourmatch++
+    } else if (yourscore < oppscore){
+        strike();
     }
+
+    document.getElementById('matchscore').innerHTML = yourmatch;
+    gameReset();
+}
+
+function strike(){
+    console.log('strike');
 }
 
 // the beginning of the player button functions //
