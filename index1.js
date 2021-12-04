@@ -276,6 +276,8 @@ function gauntletRecorder(){
 }
 
 function gauntletAdj(){
+    console.log(yourscore);
+    console.log(cbuttons.length);
     for (i = 0; i < cbuttons.length && i < yourscore; i++){
         cbuttons[i].value = i + 1 +'.5';
     }
