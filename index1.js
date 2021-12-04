@@ -430,13 +430,11 @@ function normComp(){
 }
 
 function theGauntlet(){
-    console.log('this far');
     btnDisabler('playcomp', 'play2p');
     btnEnabler('newround');
 }
 
 function play2p(){
-    console.log('wrong one');
     btnDisabler('playcomp', 'play2p');
     btnEnabler('newround');
     alert("User data currently does not get recorded for two-player games.")
