@@ -715,6 +715,8 @@ function newGame(){
 }
 
 function newGauntlet(){
+    gauntletAdj();
+
     if (yourscore > oppscore){
         yourmatch++
     } else if (yourscore < oppscore){
