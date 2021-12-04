@@ -253,7 +253,7 @@ function gauntletRecorder(){
 
 function gauntletAdj(){
     for (i = 0; i < cbuttons.length; i++){
-        cbutton[i].value = i + 1 +'.5';
+        cbuttons[i].value = i + 1 +'.5';
     }
 }
 
