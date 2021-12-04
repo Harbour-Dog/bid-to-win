@@ -276,9 +276,9 @@ function gauntletRecorder(){
 }
 
 function gauntletAdj(){
-    console.log(yourscore);
+    console.log(yourmatch);
     console.log(cbuttons.length);
-    for (i = 0; i < cbuttons.length && i < yourscore; i++){
+    for (i = 0; i < cbuttons.length && i < yourmatch; i++){
         cbuttons[i].value = i + 1 +'.5';
     }
 }
@@ -715,8 +715,6 @@ function newGame(){
 }
 
 function newGauntlet(){
-    gauntletAdj();
-
     if (yourscore > oppscore){
         yourmatch++
     } else if (yourscore < oppscore){
@@ -724,6 +722,7 @@ function newGauntlet(){
     }
 
     document.getElementById('matchscore').innerHTML = yourmatch;
+    gauntletAdj();
     gameReset();
 }
 
