@@ -283,6 +283,20 @@ function gauntletAdj(){
     }
 }
 
+function gauntletBids(){
+    for (i = 0; i < Math.ceil(yourmatch/10); i++){
+        if (oppbid1 <= yourmatch - (10 * i)){
+            oppbid1 = oppbid1 + 0.5;
+        }
+    }
+
+    for (i = 0; i < Math.ceil(yourmatch/10); i++){
+        if (oppbid2 <= yourmatch - (10 * i)){
+            oppbid2 = oppbid2 + 0.5;
+        }
+    }
+}
+
 //start of login/create user functions//
 function logBox() {
     if (youradj.length == 0){
@@ -601,6 +615,10 @@ function Commit(){
 
 function scoreReveal(){
     scorerev++
+
+    if (scorerev == 1){
+        gauntletBids();
+    } else {}
 
     if (cpu == 0 && scorerev == 1){
         document.getElementById("yourbid1").innerHTML = yourbid1;
