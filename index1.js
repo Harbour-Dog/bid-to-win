@@ -36,7 +36,7 @@ let gp, wins, losses, ties, abs, winper;
 let lowspread = 0;
 
 // variable specific to not yet implemented Gauntlet Mode //
-let mod, adj;
+let gauntlet, mod, adj;
 
 // general functions that get called by a variety of others //
 function btnDisabler(){
@@ -414,12 +414,19 @@ function Rules() {
 
 function playComp(){
     cpu = 1;
-    btnDisabler('playcomp', 'play2p');
-    btnEnabler('newround');
     document.getElementById("player2").src = "images/comp_player.png";
     document.getElementById("p2").innerHTML = "COMPUTER";
     compcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     yourcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    document.getElementById("playcomp").value = 'Normal Mode';
+    document.getElementById("playcomp").onclick = normComp;
+    document.getElementById("play2p").value = 'Gauntlet Mode';
+    document.getElementById("play2p").onclick = theGauntlet;
+}
+
+function normComp(){
+    btnDisabler('playcomp', 'play2p');
+    btnEnabler('newround');
 }
 
 function play2p(){
