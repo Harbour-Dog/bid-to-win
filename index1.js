@@ -429,7 +429,14 @@ function normComp(){
     btnEnabler('newround');
 }
 
+function theGauntlet(){
+    caonsole.log('this far');
+    btnDisabler('playcomp', 'play2p');
+    btnEnabler('newround');
+}
+
 function play2p(){
+    console.log('wrong one');
     btnDisabler('playcomp', 'play2p');
     btnEnabler('newround');
     alert("User data currently does not get recorded for two-player games.")
@@ -3021,15 +3028,7 @@ function gameStateRouter(){
 }
 
 //beginning of not yet implemented Gauntlet mode//
-function theGauntlet(){
-    gauntlet++
-    mod = gauntlet*2;
 
-    if (gauntlet < 6){
-        document.getElementById('opp'+mod).value = mod+'.5';
-        document.getElementById('opp'+mod).onclick = gauntlet5Adj;//onclick will not work, as it's against the computer// 
-    }
-}
 
 function gauntlet5Adj(){
     loop++;
