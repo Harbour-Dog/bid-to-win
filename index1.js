@@ -430,7 +430,7 @@ function normComp(){
 }
 
 function theGauntlet(){
-    caonsole.log('this far');
+    console.log('this far');
     btnDisabler('playcomp', 'play2p');
     btnEnabler('newround');
 }
