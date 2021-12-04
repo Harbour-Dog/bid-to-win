@@ -748,7 +748,7 @@ function newGauntlet(){
 }
 
 function strike(){
-    console.log('strike');
+    console.log('strike');// NEXT FUNCTION TO ADD
 }
 
 // the beginning of the player button functions //
