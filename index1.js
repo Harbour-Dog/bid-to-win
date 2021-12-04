@@ -616,6 +616,9 @@ function Commit(){
 function scoreReveal(){
     scorerev++
 
+    let oppbid1Adj = oppbid1;
+    let oppbid2Adj = oppbid2;
+
     if (scorerev == 1){
         gauntletBids();
     } else {}
@@ -627,7 +630,7 @@ function scoreReveal(){
     } else if (cpu == 1 && scorerev == 1){
         document.getElementById("oppbid1").innerHTML = oppbid1;
         line1.style.backgroundColor = "black";
-        document.getElementById("opp"+oppbid1).style.backgroundColor = "black";
+        document.getElementById("opp"+oppbid1Adj).style.backgroundColor = "black";
     } else if (scorerev == 2){
         if (yourbid1 > oppbid1){
             yourscore = yourscore + trick1;
@@ -659,7 +662,7 @@ function scoreReveal(){
     } else if (cpu == 1 && scorerev == 3){
         document.getElementById("oppbid2").innerHTML = oppbid2;
         line2.style.backgroundColor = "black";
-        document.getElementById("opp"+oppbid2).style.backgroundColor = "black";
+        document.getElementById("opp"+oppbid2Adj).style.backgroundColor = "black";
     } else {
         if (yourbid2 > oppbid2){
             yourscore = yourscore + trick2;
