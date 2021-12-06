@@ -303,7 +303,7 @@ function oppbid1FontAdjust(){
 
 function oppbid2FontAdjust(){
     if (oppbid2 <= yourmatch){
-        document.getElementById('oppbid1').style.fontSize = '2.2vw';
+        document.getElementById('oppbid2').style.fontSize = '2.2vw';
     }
 }
 
