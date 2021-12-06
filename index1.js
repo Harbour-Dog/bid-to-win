@@ -580,6 +580,8 @@ function trickGen(){
     if (cpu == 0){//if vs. comp, sets cbidboxes to ?
         blankInnerHTML('oppbid1', 'oppbid2');
     } else {
+        document.getElementById('oppbid1').style.width = '5.85vw';
+        document.getElementById('oppbid2').style.width = '5.85vw';
         document.getElementById("oppbid1").innerHTML = "?";
         document.getElementById("oppbid2").innerHTML = "?";
     }
