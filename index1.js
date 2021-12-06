@@ -300,15 +300,16 @@ function oppbid1FontAdjust(){
         document.getElementById('oppbid1').style.fontSize = '2.2vw';
     }
 
+    console.log(oppbid1);
     console.log(document.getElementById('oppbid1').style.fontSize);
+    console.log(yourmatch);
+    console.log('----------');
 }
 
 function oppbid2FontAdjust(){
     if (oppbid2 <= yourmatch){
         document.getElementById('oppbid2').style.fontSize = '2.2vw';
     }
-
-    console.log(document.getElementById('oppbid2').style.fontSize);
 }
 
 //start of login/create user functions//
