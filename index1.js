@@ -1,4 +1,4 @@
-let oppbid1, oppbid2;
+let oppbid1, oppbid2, oppbid1Adj, oppbid2Adj;
 let yourbid1, yourbid2;
 let trick1, trick2;
 let line1, line2, line3, line4;
@@ -626,10 +626,9 @@ function Commit(){
 function scoreReveal(){
     scorerev++
 
-    let oppbid1Adj = oppbid1;
-    let oppbid2Adj = oppbid2;
-
     if (scorerev == 1){
+        oppbid1Adj = oppbid1;
+        oppbid2Adj = oppbid2;
         gauntletBids();
     } else {}
 
