@@ -276,8 +276,6 @@ function gauntletRecorder(){
 }
 
 function gauntletAdj(){
-    console.log(yourmatch);
-    console.log(cbuttons.length);
     for (i = 0; i < cbuttons.length && i < yourmatch; i++){
         cbuttons[i].value = i + 1 +'.5';
     }
@@ -294,6 +292,18 @@ function gauntletBids(){
         if (oppbid2 <= yourmatch - (10 * i)){
             oppbid2 = oppbid2 + 0.5;
         }
+    }
+}
+
+function oppbid1FontAdjust(){
+    if (oppbid1 <= yourmatch){
+        document.getElementById('oppbid1').style.fontSize = '2.2vw';
+    }
+}
+
+function oppbid2FontAdjust(){
+    if (oppbid2 <= yourmatch){
+        document.getElementById('oppbid1').style.fontSize = '2.2vw';
     }
 }
 
@@ -688,6 +698,12 @@ function scoreReveal(){
             document.getElementById("scoreboard").style.color = "black";
         }
     }
+
+    if (scorerev == 1){
+        oppbid1FontAdjust();
+    } else if (scorerev == 3){
+        oppbid2FontAdjust();
+    } else {}
 
     if (scorerev >= 4 && youradj.length != 10){    
         btnEnabler('newround');
