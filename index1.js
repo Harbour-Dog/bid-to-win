@@ -295,16 +295,20 @@ function gauntletBids(){
     }
 }
 
-function oppbid1FontAdjust(){
-    if (Math.floor(oppbid1) <= yourmatch){
-        document.getElementById('oppbid1').style.fontSize = '2.2vw';
-    }
+function oppbid1SizeAdjust(){
+    if (Math.floor(oppbid1) <= yourmatch && oppbid1 <= 10){
+        document.getElementById('oppbid1').style.width = '7.7vw';
+    } else if (Math.floor(oppbid1) <= yourmatch){
+        document.getElementById('oppbid1').style.width = '7.7vw';
+    } else{}
 }
 
-function oppbid2FontAdjust(){
-    if (Math.floor(oppbid2) <= yourmatch){
-        document.getElementById('oppbid2').style.fontSize = '2.2vw';
-    }
+function oppbid2SizeAdjust(){
+    if (Math.floor(oppbid2) <= yourmatch && oppbid2 <= 10){
+        document.getElementById('oppbid2').style.width = '7.7vw';
+    } else if (Math.floor(oppbid2) <= yourmatch){
+        document.getElementById('oppbid2').style.width = '7.7vw';
+    } else{}
 }
 
 //start of login/create user functions//
@@ -699,9 +703,9 @@ function scoreReveal(){
     }
 
     if (scorerev == 1){
-        oppbid1FontAdjust();
+        oppbid1SizeAdjust();
     } else if (scorerev == 3){
-        oppbid2FontAdjust();
+        oppbid2SizeAdjust();
     } else {}
 
     if (scorerev >= 4 && youradj.length != 10){    

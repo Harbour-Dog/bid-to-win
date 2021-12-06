@@ -316,7 +316,7 @@ th {
 
 .cbidbox {
     height: 5.85vw;
-    width: 5.85vw;
+    font-size: 4.4vw;
     background-color: lightgray;
     text-align: center;
     border-radius: 0.75vw;
