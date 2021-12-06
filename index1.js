@@ -296,23 +296,15 @@ function gauntletBids(){
 }
 
 function oppbid1FontAdjust(){
-    if (oppbid1 <= yourmatch){
+    if (Math.floor(oppbid1) <= yourmatch){
         document.getElementById('oppbid1').style.fontSize = '2.2vw';
     }
-    console.log('----oppbid1------');
-    console.log(oppbid1);
-    console.log(document.getElementById('oppbid1').style.fontSize);
-    console.log(yourmatch);
 }
 
 function oppbid2FontAdjust(){
-    if (oppbid2 <= yourmatch){
+    if (Math.floor(oppbid2) <= yourmatch){
         document.getElementById('oppbid2').style.fontSize = '2.2vw';
     }
-    console.log('----oppbid2------');
-    console.log(oppbid1);
-    console.log(document.getElementById('oppbid1').style.fontSize);
-    console.log(yourmatch);
 }
 
 //start of login/create user functions//
