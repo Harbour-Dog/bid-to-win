@@ -500,6 +500,7 @@ function Rules() {
 }
 
 function playComp(){
+    console.log(user);
     cpu = 1;
     document.getElementById("player2").src = "images/comp_player.png";
     document.getElementById("p2").innerHTML = "COMPUTER";
@@ -524,6 +525,10 @@ function theGauntlet(){
 
     btnDisabler('playcomp', 'play2p');
     btnEnabler('newround');
+
+    if (user == undefined){
+        alert('No login detected. User data will not be saved.')
+    } else {}
 }
 
 function play2p(){
