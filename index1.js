@@ -774,6 +774,16 @@ function strike(){
 
     document.getElementById('matchscore').innerHTML = `STRIKE ${strikecount}`;
     document.getElementById('matchscore').style.backgroundColor = 'red';
+    document.getElementById('matchscore').style.color = 'blue';
+
+    if (strikecount >= 3){
+        document.getElementById('newround').value = 'See Results';
+        document.getElementById('newround').onclick = gauntletResults;
+    }
+}
+
+function gauntletResults(){// this function will query the database to return rankings for the trial
+    console.log('gauntletResults');
 }
 
 // the beginning of the player button functions //
