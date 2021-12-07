@@ -783,7 +783,7 @@ function strike(){
 }
 
 function gauntletResults(){// this function will query the database to return rankings for the trial
-    console.log('gauntletResults');
+    console.log('gauntletResults');// it will need to reset page after recording/displaying
 }
 
 // the beginning of the player button functions //
