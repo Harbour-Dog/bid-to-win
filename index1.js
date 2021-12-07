@@ -761,7 +761,7 @@ function newGauntlet(){
     if (yourscore > oppscore){
         yourmatch++
     } else if (yourscore < oppscore){
-        strike();
+        setTimeout(strike, 1000);
     }
 
     document.getElementById('matchscore').innerHTML = yourmatch;
