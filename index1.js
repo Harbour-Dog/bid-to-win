@@ -719,6 +719,7 @@ function scoreReveal(){
         if (gauntlet == 0){
             resultRecorder();
         } else {
+            strike();
             gauntletRecorder();
         }
     } else {
@@ -760,10 +761,9 @@ function newGame(){
 function newGauntlet(){
     if (yourscore > oppscore){
         yourmatch++
-    } else if (yourscore < oppscore){
-        setTimeout(strike, 1000);
-    }
+    } else {}
 
+    document.getElementById('matchscore').style.backgroundColor = 'lightgray';
     document.getElementById('matchscore').innerHTML = yourmatch;
     gauntletAdj();
     gameReset();
