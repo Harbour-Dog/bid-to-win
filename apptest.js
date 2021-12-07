@@ -19,5 +19,6 @@ const user = require('./routes/user.js');
 const userstats = require('./routes/userstats.js');
 app.use('/user', user);
 app.use('/userstats', userstats);
+//app.use('/gauntlet', gauntlet)
 
 module.exports = app;
