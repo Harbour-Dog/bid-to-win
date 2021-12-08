@@ -527,8 +527,14 @@ function theGauntlet(){
 
     if (user == undefined){
         alert('No login detected. User data will not be saved.')
-    } else {}
+    } else {
+        gauntletStart();
+    }
 }
+
+// function gauntletStart(){
+
+// }
 
 function play2p(){
     btnDisabler('playcomp', 'play2p');

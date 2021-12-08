@@ -126,4 +126,4 @@ const temp = (req, res, next) => {
     })
 }
 
-module.exports = {fetch, create, record, gameLog, start};
+module.exports = {fetch, create, record, gameLog, start, temp};
