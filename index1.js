@@ -722,6 +722,8 @@ function scoreReveal(){
         btnEnabler('newgame');
         if (gauntlet == 0){
             resultRecorder();
+        } else if (gauntlet == 1 && yourscore >= oppscore){
+            gauntletRecorder();
         } else {
             strike();
             gauntletRecorder();
