@@ -38,7 +38,7 @@ let lowspread = 0;
 // variable specific to not yet implemented Gauntlet Mode //
 let gauntlet = 0;
 let strikecount = 0;
-let mod, adj;
+let mod, adj, gauntwin;
 
 // general functions that get called by a variety of others //
 function btnDisabler(){

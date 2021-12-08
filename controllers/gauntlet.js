@@ -45,26 +45,6 @@ const create = (req, res, next) => {
     })
 }
 
-const record = (req, res, next) => {
-    let db = mysql.createPool({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE
-    });
-
-    let sql = 'UPDATE gauntlet_stats SET Wins=?, Losses=?, AvgWins=?, Abandons=Abandons-1 WHERE Username=?'
-    db.query(sql, [req.body.Wins, req.body.Losses, req.body.AvgWins, req.body.Username], (err, result) => {
-        if(err){
-            res.status(400).json({data: [{msg: "No log in detected"}]});
-            db.end();
-        } else {
-            res.status(200).json({Success: true});
-            db.end();
-        }
-    })
-}
-
 const gameLog = (req, res, next) => {
     let db = mysql.createPool({
         host: process.env.HOST,
@@ -86,4 +66,64 @@ const gameLog = (req, res, next) => {
     })
 }
 
-module.exports = {fetch, create, record, gameLog};
+const record = (req, res, next) => {
+    let db = mysql.createPool({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
+    });
+
+    let sql = 'UPDATE gauntlet_stats SET Wins=?, Losses=?, AvgWins=?, Abandons=Abandons-1 WHERE Username=?';
+    db.query(sql, [req.body.Wins, req.body.Losses, req.body.AvgWins, req.body.Username], (err, result) => {
+        if(err){
+            res.status(400).json({data: [{msg: "No log in detected"}]});
+            db.end();
+        } else {
+            res.status(200).json({Success: true});
+            db.end();
+        }
+    })
+}
+
+const start = (req, res, next) => {
+    let db = mysql.createPool({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
+    });
+
+    let sql = 'UPDATE gauntlet_stats SET Attempts=Attempts+1, Abandons=Abandons+1 WHERE Username=?';
+    db.query(sql, req.body.Username, (err, result) => {
+        if (err){
+            res.status(400).json({data: [{msg: "No log in detected"}]});
+            db.end();
+        } else {
+            res.status(200).json({Success: true});
+            db.end();
+        }
+    })
+}
+
+const temp = (req, res, next) => {
+    let db = mysql.createPool({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
+    });
+
+    let sql = 'UPDATE gauntlet_temp SET Wins=?, Losses=? WHERE Username=?';
+    db.query(sql, [req.body.Wins, req.body.Losses], (err, result) => {
+        if (err){
+            res.status(400).json({data: [{msg: "No log in detected"}]});
+            db.end();
+        } else {
+            res.status(200).json({Success: true});
+            db.end();
+        }
+    })
+}
+
+module.exports = {fetch, create, record, gameLog, start};
