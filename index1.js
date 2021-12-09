@@ -521,6 +521,8 @@ function theGauntlet(){
 
     document.getElementById('tally').innerHTML = 'Wins';
     document.getElementById('matchscore').innerHTML = 0;
+    document.getElementById('playcomp').value = 'Play vs. Comp';
+    document.getElementById('play2p').value = '2-Player Game';
 
     btnDisabler('playcomp', 'play2p');
     btnEnabler('newround');
