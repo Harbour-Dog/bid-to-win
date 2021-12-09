@@ -13,7 +13,7 @@ const fetch = (req, res, next) => {
     });
 
     let sql = 'SELECT * FROM gauntlet_stats WHERE Username=?';
-    db.query(sql, req.body.Username, (err, result) => {
+    db.query(sql, req.query.Username, (err, result) => {
         if(result.length == 0){
             res.status(400).json({data: [{msg: 'No gauntlet data recorded for current user'}]});
             db.end();

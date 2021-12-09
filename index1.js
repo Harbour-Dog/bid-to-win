@@ -38,7 +38,8 @@ let lowspread = 0;
 // variable specific to not yet implemented Gauntlet Mode //
 let gauntlet = 0;
 let strikecount = 0;
-let mod, adj, gauntwin;
+let mod, adj;
+let attempt, gauntwin, gauntloss, gauntavg;
 
 // general functions that get called by a variety of others //
 function btnDisabler(){
@@ -150,6 +151,21 @@ function gameStart(){
         });
 }
 
+function gauntletStart(){
+    attempt++
+    const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/gauntlet_start';
+        fetch(baseURL, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                Username: user,
+            })
+        });
+}
+
 function userWin(){
     wins++
     winper = Math.round(((wins)*100)/(wins + losses));
@@ -205,18 +221,6 @@ function userTie(){
     });
 }
 
-function gauntletWin(){
-    console.log('gauntletWin');
-}
-
-function gauntletLoss(){
-    console.log('gauntletLoss');
-}
-
-function gauntletTie(){
-    console.log('gauntletTie');
-}
-
 function userButtons(){
     for (i = 0; i < buttons.length; i++){//enables all player buttons
         buttons[i].disabled = false;
@@ -266,14 +270,18 @@ function resultRecorder(){
     } else {};
 }
 
-function gauntletRecorder(){
-    if(cpu == 1 && yourscore > oppscore && user != null){
-        gauntletWin();    
-    } else if(cpu == 1 && yourscore < oppscore && user != null){
-        gauntletLoss();
-    } else if (cpu == 1 && yourscore == oppscore && user != null){
-        gauntletTie(); 
-    } else {};
+function gauntletRecorder(){//LEFT OFF HERE --  NEED TO TARGET A GAUNTLET_TEMP FUNCTION
+    if (yourscore < oppscore){
+        strike();
+    } else {}
+
+    if(yourscore > oppscore && user != null){
+        gauntwin++    
+    } else if(yourscore < oppscore && user != null){
+        gauntloss++
+    } else {}
+
+    gauntavg = Math.round(attempt / gauntwin);
 }
 
 function gauntletAdj(){
@@ -409,6 +417,45 @@ function nowLogin(){
     ties = 0;
     abs = 0;
     winper = 0;
+    attempt = 0;
+    gauntwin = 0;
+    gauntloss = 0;
+    gauntavg = 0;
+
+    gauntletNewUser();
+}
+
+function gauntletLogin(){
+    const baseURL = `https://bid-to-win.herokuapp.com/gauntlet/1.0.0/:Username?Username=${user}`;
+    fetch(baseURL)
+        .then(response => response.json())
+        .then(result => {
+            obj = result.data[0];
+            if (obj.msg == null){
+                attempt = obj.Attempts;
+                gauntwin = obj.Wins;
+                gauntloss = obj.Loss;
+                gauntavg = obj.AvgWins;
+                gauntletStart();
+            } else {
+                loginFail();
+                blankInnerHTML('rulespar');
+                document.getElementById('rulespar').innerHTML = obj.msg;
+            }
+        });
+}
+
+function gauntletNewUser(){
+    const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/create';//adds user to gauntlet 
+    fetch(baseURL, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            Username: user
+        })});
 }
 
 function loginFail(){
@@ -527,16 +574,12 @@ function theGauntlet(){
     btnDisabler('playcomp', 'play2p');
     btnEnabler('newround');
 
-    if (user == undefined){
-        alert('No login detected. User data will not be saved.')
+    if (user == null){
+        alert('No login detected. User data will not be saved.');
     } else {
-        gauntletStart();
+        gauntletLogin();
     }
 }
-
-// function gauntletStart(){
-
-// }
 
 function play2p(){
     btnDisabler('playcomp', 'play2p');
@@ -610,7 +653,7 @@ function trickGen(){
     btnDisabler('newround');//disables Next Round
     userButtons();
 
-    if(cpu == 1 && youradj.length == 0 && user != null){
+    if(cpu == 1 && gauntlet == 0 && youradj.length == 0 && user != null){
         gp++
         abs++
         gameStart();    
@@ -730,10 +773,7 @@ function scoreReveal(){
         btnEnabler('newgame');
         if (gauntlet == 0){
             resultRecorder();
-        } else if (gauntlet == 1 && yourscore >= oppscore){
-            gauntletRecorder();
         } else {
-            strike();
             gauntletRecorder();
         }
     } else {

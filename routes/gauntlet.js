@@ -8,7 +8,7 @@ router.use(express.urlencoded({extended: true}));
 //router.use(passport.session());
 const gauntletController = require('../controllers/gauntlet.js');
 
-router.get('/1.0.0', gauntletController.fetch);
+router.get('/1.0.0/:Username', gauntletController.fetch);
 router.post('/1.0.0/create', gauntletController.create);
 router.post('/1.0.0/log', gauntletController.gameLog);
 router.put('1.0.0/record', gauntletController.record);
