@@ -106,7 +106,47 @@ const start = (req, res, next) => {
     })
 }
 
-const temp = (req, res, next) => {
+const tempClear = (req, res, next) => {
+    let db = mysql.createPool({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
+    });
+
+    let sql = 'DELETE FROM gauntlet_temp WHERE Username=?'
+    db.query(sql, req.body.Username, (err, result) => {
+        if (err){
+            res.status(400).json({data: [{msg: "Unable to prepare temporary record"}]});
+            db.end();
+        } else {
+            res.status(200).json({Success: true});
+            db.end();
+        }
+    })
+}
+
+const setup = (req, res, next) => {
+    let db = mysql.createPool({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
+    });
+
+    let sql = 'INSERT INTO gauntlet_temp (Username, Wins, Losses) VALUES (?, 0, 0)';
+    db.query(sql, req.body.Username, (err, result) => {
+        if (err){
+            res.status(400).json({data: [{msg: "Unable to prepare temporary record"}]});
+            db.end();
+        } else {
+            res.status(200).json({Success: true});
+            db.end();
+        }
+    })
+}
+
+const tempRecord = (req, res, next) => {
     let db = mysql.createPool({
         host: process.env.HOST,
         user: process.env.USER,
@@ -126,4 +166,4 @@ const temp = (req, res, next) => {
     })
 }
 
-module.exports = {fetch, create, record, gameLog, start, temp};
+module.exports = {fetch, create, record, gameLog, start, tempClear, setup, tempRecord};

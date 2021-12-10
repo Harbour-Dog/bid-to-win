@@ -153,9 +153,41 @@ function gameStart(){
 
 function gauntletStart(){
     attempt++
-    const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/gauntlet_start';
+    const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/start';
         fetch(baseURL, {
             method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                Username: user,
+            })
+        });
+
+    gauntletTempClear();
+}
+
+function gauntTempClear(){
+    const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/temp/clear';
+        fetch(baseURL, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                Username: user,
+            })
+        });
+
+    gauntletTempSetup();
+}
+
+function gauntletTempSetup(){
+    const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/temp/setup';
+        fetch(baseURL, {
+            method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -282,6 +314,21 @@ function gauntletRecorder(){//LEFT OFF HERE --  NEED TO TARGET A GAUNTLET_TEMP F
     } else {}
 
     gauntavg = Math.round(attempt / gauntwin);
+
+    gauntTempRecord();
+}
+
+function gauntletTempRecord(){
+    const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/temp/record'; 
+    fetch(baseURL, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            Username: user
+        })});
 }
 
 function gauntletAdj(){
