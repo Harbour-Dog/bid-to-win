@@ -601,10 +601,10 @@ function playComp(){
     document.getElementById("p2").innerHTML = "COMPUTER";
     compcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     yourcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    document.getElementById("playcomp").value = 'Normal Mode';
-    document.getElementById("playcomp").onclick = normComp;
-    document.getElementById("play2p").value = 'Gauntlet Mode';
-    document.getElementById("play2p").onclick = theGauntlet;
+    // document.getElementById("playcomp").value = 'Normal Mode';
+    // document.getElementById("playcomp").onclick = normComp;
+    // document.getElementById("play2p").value = 'Gauntlet Mode';
+    // document.getElementById("play2p").onclick = theGauntlet;
 }
 
 function normComp(){
