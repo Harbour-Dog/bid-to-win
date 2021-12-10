@@ -302,7 +302,7 @@ function resultRecorder(){
     } else {};
 }
 
-function gauntletRecorder(){//LEFT OFF HERE --  NEED TO TARGET A GAUNTLET_TEMP FUNCTION
+function gauntletRecorder(){
     if (yourscore < oppscore){
         strike();
     } else {}
@@ -327,7 +327,9 @@ function gauntletTempRecord(){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            Username: user
+            Username: user,
+            Wins: gauntwin,
+            Losses: gauntloss
         })});
 }
 
@@ -735,10 +737,13 @@ function Commit(){
 function scoreReveal(){
     scorerev++
 
-    if (scorerev == 1){
+    if (scorerev == 1 && gauntlet == 1){
         oppbid1Adj = oppbid1;
         oppbid2Adj = oppbid2;
         gauntletBids();
+    } else if (scorerev == 1){
+        oppbid1Adj = oppbid1;
+        oppbid2Adj = oppbid2;
     } else {}
 
     if (cpu == 0 && scorerev == 1){
@@ -807,9 +812,9 @@ function scoreReveal(){
         }
     }
 
-    if (scorerev == 1){
+    if (scorerev == 1 && gauntlet == 1){
         oppbid1SizeAdjust();
-    } else if (scorerev == 3){
+    } else if (scorerev == 3 && gauntlet == 1){
         oppbid2SizeAdjust();
     } else {}
 
@@ -883,8 +888,18 @@ function strike(){
     }
 }
 
-function gauntletResults(){// this function will query the database to return rankings for the trial
-    console.log('gauntletResults');// it will need to reset page after recording/displaying
+function gauntletResults(){// first gauntlet_runs, then gauntlet_stats, then return rankings maybe?
+    const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/runs';
+    fetch(baseURL, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            Username: user,
+            Wins: gauntwin
+        })});
 }
 
 // the beginning of the player button functions //

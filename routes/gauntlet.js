@@ -14,5 +14,6 @@ router.post('/1.0.0/log', gauntletController.gameLog);
 router.put('1.0.0/record', gauntletController.record);
 router.put('1.0.0/start', gauntletController.start);
 router.delete('/1.0.0/temp/clear', gauntletController.tempClear);
-router.post('/1.0.0/temp/setup', gauntletController.setup)
+router.post('/1.0.0/temp/setup', gauntletController.setup);
 router.put('/1.0.0/temp/record', gauntletController.tempRecord);
+router.post('1.0.0/runs', gauntletController.runs);

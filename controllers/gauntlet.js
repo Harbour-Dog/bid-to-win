@@ -155,7 +155,7 @@ const tempRecord = (req, res, next) => {
     });
 
     let sql = 'UPDATE gauntlet_temp SET Wins=?, Losses=? WHERE Username=?';
-    db.query(sql, [req.body.Wins, req.body.Losses], (err, result) => {
+    db.query(sql, [req.body.Wins, req.body.Losses, req.body.Username], (err, result) => {
         if (err){
             res.status(400).json({data: [{msg: "No log in detected"}]});
             db.end();
@@ -166,4 +166,24 @@ const tempRecord = (req, res, next) => {
     })
 }
 
-module.exports = {fetch, create, record, gameLog, start, tempClear, setup, tempRecord};
+const runs = (req, res, next) => {
+    let db = mysql.createPool({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
+    });
+
+    let sql = 'INSERT INTO gauntlet_runs (Username, Wins) VALUES (?, ?)';
+    db.query(sql, [req.body.Username, req.body.Wins], (err, result) => {
+        if (err){
+            res.status(400).json({data: [{msg: "Gauntlet data unable to be saved"}]});
+            db.end();
+        } else {
+            res.status(200).json({Success: true});
+            db.end();
+        }
+    })
+}
+
+module.exports = {fetch, create, record, gameLog, start, tempClear, setup, tempRecord, runs};
