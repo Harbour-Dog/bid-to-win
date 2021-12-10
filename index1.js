@@ -605,6 +605,10 @@ function playComp(){
     // document.getElementById("playcomp").onclick = normComp;
     // document.getElementById("play2p").value = 'Gauntlet Mode';
     // document.getElementById("play2p").onclick = theGauntlet;
+
+    //the following is to be removed when gaunlet is working
+    btnDisabler('playcomp', 'play2p');
+    btnEnabler('newround');
 }
 
 function normComp(){
