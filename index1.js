@@ -1,3 +1,6 @@
+//Gauntlet setup correctly as far as being ready to click 'newround'
+
+
 let oppbid1, oppbid2, oppbid1Adj, oppbid2Adj;
 let yourbid1, yourbid2;
 let trick1, trick2;
@@ -171,23 +174,7 @@ function gauntletStart(){
 function gauntTempClear(){
     const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/temp/clear';
         fetch(baseURL, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                Username: user,
-            })
-        });
-
-    gauntletTempSetup();
-}
-
-function gauntletTempSetup(){
-    const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/temp/setup';
-        fetch(baseURL, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -197,6 +184,20 @@ function gauntletTempSetup(){
             })
         });
 }
+
+// function gauntletTempSetup(){
+//     const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/temp/setup';
+//         fetch(baseURL, {
+//             method: 'POST',
+//             headers: {
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//                 Username: user,
+//             })
+//         });
+// }
 
 function userWin(){
     wins++
