@@ -314,7 +314,7 @@ function gauntletRecorder(){
         gauntloss++
     } else {}
 
-    gauntavg = Math.round(attempt / gauntwin);
+    gauntavg = Math.round(gauntwin / attempt);
 
     gauntTempRecord();
 }
@@ -495,8 +495,23 @@ function gauntletLogin(){
         });
 }
 
-function gauntletNewUser(){
-    const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/create';//adds user to gauntlet 
+function gauntletNewUser(){//adds user to gauntlet_stats
+    const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/create';
+    fetch(baseURL, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            Username: user
+        })});
+    
+        gauntletNewTemp();
+}
+
+function gauntletNewTemp(){ //adds new user to gauntlet_temp
+    const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/temp/create';
     fetch(baseURL, {
         method: 'POST',
         headers: {
@@ -825,10 +840,10 @@ function scoreReveal(){
 
     if (scorerev >= 4 && youradj.length != 10){    
         btnEnabler('newround');
-    } else if (scorerev >= 4 && youradj.length == 10){
-        abs--        
+    } else if (scorerev >= 4 && youradj.length == 10){       
         btnEnabler('newgame');
         if (gauntlet == 0){
+            abs--
             resultRecorder();
         } else {
             gauntletRecorder();
@@ -842,7 +857,7 @@ function newGameRoute(){
     if (gauntlet == 0){
         newGame();
     } else {
-        newGauntlet()
+        newGauntlet();
     }
 }
 
