@@ -186,4 +186,44 @@ const runs = (req, res, next) => {
     })
 }
 
-module.exports = {fetch, create, record, gameLog, start, tempClear, tempCreate, tempRecord, runs};
+const runCount = (req, res, next) => {
+    let db = mysql.createPool({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
+    });
+
+    let sql = 'SELECT COUNT(*) FROM gauntlet_runs';
+    db.query(sql, (err, result) => {
+        if (err){
+            res.status(400).json({data: [{msg: "Unable to compare stats"}]});
+            db.end();
+        } else {
+            res.status(200).json({Success: true, data: result});
+            db.end();
+        }
+    })
+}
+
+const runStats = (req, res, next) => {
+    let db = mysql.createPool({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE
+    });
+
+    let sql = 'SELECT * FROM gauntlet_runs WHERE Wins > ?';
+    db.query(sql, req.query.Wins, (err, result) => {
+        if(err) {
+            res.status(400).json({data: [{msg: "Unable to compare stats"}]});
+            db.end();
+        } else {
+            res.status(200).json({Success: true, data: result});
+            db.end();
+        }
+    });    
+}
+
+module.exports = {fetch, create, record, gameLog, start, tempClear, tempCreate, tempRecord, runs, runCount, runStats};

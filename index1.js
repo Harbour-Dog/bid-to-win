@@ -920,6 +920,24 @@ function gauntletResults(){// first gauntlet_runs, then gauntlet_stats, then ret
             Username: user,
             Wins: gauntwin
         })});
+
+    gauntletGetComps();
+}
+
+function gauntletGetComps(){
+    const baseURL = `https://bid-to-win.herokuapp.com/gauntlet/1.0.0/runs/count`;
+    fetch(baseURL)
+        .then(response => response.json())
+        .then(result => {
+            obj = result.data[0];
+            if (obj.msg == null){//obj.Count may not be right
+                field = obj.Count;
+            } else {
+                loginFail();
+                blankInnerHTML('rulespar');
+                document.getElementById('rulespar').innerHTML = obj.msg;
+            }
+        });
 }
 
 // the beginning of the player button functions //
