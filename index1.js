@@ -41,7 +41,7 @@ let lowspread = 0;
 // variable specific to not yet implemented Gauntlet Mode //
 let gauntlet = 0;
 let strikecount = 0;
-let mod, adj;
+let mod, adj, field, comps, percentile;
 let attempt, gauntwin, gauntloss, gauntavg;
 
 // general functions that get called by a variety of others //
@@ -184,20 +184,6 @@ function gauntTempClear(){
             })
         });
 }
-
-// function gauntletTempSetup(){
-//     const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/temp/setup';
-//         fetch(baseURL, {
-//             method: 'POST',
-//             headers: {
-//                 'Accept': 'application/json',
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//                 Username: user,
-//             })
-//         });
-// }
 
 function userWin(){
     wins++
@@ -921,10 +907,10 @@ function gauntletResults(){// first gauntlet_runs, then gauntlet_stats, then ret
             Wins: gauntwin
         })});
 
-    gauntletGetComps();
+    gauntletGetField();
 }
 
-function gauntletGetComps(){
+function gauntletGetField(){
     const baseURL = `https://bid-to-win.herokuapp.com/gauntlet/1.0.0/runs/count`;
     fetch(baseURL)
         .then(response => response.json())
@@ -938,6 +924,60 @@ function gauntletGetComps(){
                 document.getElementById('rulespar').innerHTML = obj.msg;
             }
         });
+
+    gauntletGetComps();
+}
+
+function gauntletGetComps(){
+    const baseURL = `https://bid-to-win.herokuapp.com/gauntlet/1.0.0/runs/stats`;
+    fetch(baseURL)
+        .then(response => response.json())
+        .then(result => {
+            obj = result.data[0];
+            if (obj.msg == null){//obj.Count may not be right
+                comps = obj.Count;
+                percentile = [(field - comps) * 100 / field];
+                gauntletStatDisplay();
+            } else {
+                loginFail();
+                blankInnerHTML('rulespar');
+                document.getElementById('rulespar').innerHTML = obj.msg;
+            }
+        });
+}
+
+function gauntletStatDisplay(){
+    blankInnerHTML('rulespar', 'lossesranklabel', 'tiesranklabel', 'absranklabel', 'winperranklabel');
+    document.getElementById("userhead").innerHTML = user;
+    document.getElementById('gpranklabel').innerHTML = 'Rank'
+    document.getElementById('winsranklabel').innerHTML = 'Percentile'
+
+    if(obj.Count > 10 && obj.Count < 14){// this doesn't currently deal the teens in the hundreds correctly//
+        document.getElementById('gpdisp').innerHTML = obj.Count+'th';
+    } else if (rem == 1){
+        document.getElementById('gpdisp').innerHTML = obj.Count+'st';
+    } else if (rem == 2){
+        document.getElementById('gpdisp').innerHTML = obj.Count+'nd';
+    } else if (rem == 3){
+        document.getElementById('gpdisp').innerHTML = obj.Count+'rd';
+    } else {
+        document.getElementById('gpdisp').innerHTML = obj.Count+'th';
+    }
+
+    if(obj.Count > 10 && obj.Count < 14){// this doesn't currently deal the teens in the hundreds correctly//
+        document.getElementById('winsdisp').innerHTML = obj.Count+'th';
+    } else if (rem == 1){
+        document.getElementById('winsdisp').innerHTML = obj.Count+'st';
+    } else if (rem == 2){
+        document.getElementById('winsdisp').innerHTML = obj.Count+'nd';
+    } else if (rem == 3){
+        document.getElementById('winsdisp').innerHTML = obj.Count+'rd';
+    } else {
+        document.getElementById('winsdisp').innerHTML = obj.Count+'th';
+    }
+    
+    document.getElementById("statdisplay").style.display = "inline-flex";
+    document.getElementById('stattable').style.display = '';
 }
 
 // the beginning of the player button functions //
