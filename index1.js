@@ -471,7 +471,6 @@ function gauntletLogin(){
         .then(response => response.json())
         .then(result => {
             obj = result.data[0];
-            console.log(obj);
             if (obj.msg == null){
                 attempt = obj.Attempts;
                 gauntwin = obj.Wins;
@@ -623,6 +622,7 @@ function playComp(){
 function normComp(){
     btnDisabler('playcomp', 'play2p');
     btnEnabler('newround');
+    restartBtn();
 }
 
 function theGauntlet(){
@@ -635,12 +635,18 @@ function theGauntlet(){
 
     btnDisabler('playcomp', 'play2p');
     btnEnabler('newround');
+    restartBtn();
 
     if (user == null){
         alert('No login detected. User data will not be saved.');
     } else {
         gauntletLogin();
     }
+}
+
+function restartBtn(){
+    document.getElementById("login").onclick = signOut;
+    logBox();
 }
 
 function play2p(){
