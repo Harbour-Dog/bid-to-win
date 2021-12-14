@@ -645,8 +645,8 @@ function theGauntlet(){
 }
 
 function restartBtn(){
-    document.getElementById("login").onclick = signOut;
-    logBox();
+    document.getElementById('login').innerHTML = 'Exit Game';
+    document.getElementById('login').onclick = signOut;
 }
 
 function play2p(){
