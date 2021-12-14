@@ -474,7 +474,7 @@ function gauntletLogin(){
             if (obj.msg == null){
                 attempt = obj.Attempts;
                 gauntwin = obj.Wins;
-                gauntloss = obj.Loss;
+                gauntloss = obj.Losses;
                 gauntavg = obj.AvgWins;
                 gauntletStart();
             } else {
