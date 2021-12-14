@@ -306,7 +306,7 @@ function gauntletRecorder(){
 
     gauntavg = Math.round(gauntwin / attempt);
 
-    gauntTempRecord();
+    gauntletTempRecord();
 }
 
 function gauntletTempRecord(){
