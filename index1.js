@@ -175,7 +175,7 @@ function gauntletStart(){
     gauntletTempClear();
 }
 
-function gauntTempClear(){
+function gauntletTempClear(){
     const baseURL = 'https://bid-to-win.herokuapp.com/gauntlet/1.0.0/temp/clear';
         fetch(baseURL, {
             method: 'PUT',
