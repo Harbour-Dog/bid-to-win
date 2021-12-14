@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 router.use(express.json());
-router.use(express.urlencoded({extended: true}));
+// router.use(express.urlencoded({extended: true}));
 //const {check , validationResult} = require('express-validator');
 //const passport = require('passport');
 //router.use(passport.initialize());
@@ -19,3 +19,5 @@ router.put('/1.0.0/temp/record', gauntletController.tempRecord);
 router.post('/1.0.0/runs', gauntletController.runs);
 router.get('/1.0.0/runs/count', gauntletController.runCount);
 router.get('/1.0.0/runs/stats', gauntletController.runStats);
+
+module.exports = router;
