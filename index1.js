@@ -1,3 +1,8 @@
+// GAUNTLET WORKS
+// NEXT STEP - INCORPORATE FEATURES INTO HTML
+// STAT FETCH WORKS - NEED BETTER DISPLAY
+// DARKEN COMPBUTTONS SOME
+
 let clickSignIn = document.getElementById('Password');
 clickSignIn.addEventListener('keyup', function(event) {
   if (event.keyCode === 13) {
