@@ -467,6 +467,7 @@ function gauntletLogin(){
         .then(response => response.json())
         .then(result => {
             obj = result.data[0];
+            console.log(obj);
             if (obj.msg == null){
                 attempt = obj.Attempts;
                 gauntwin = obj.Wins;

@@ -17,8 +17,9 @@ const db = mysql.createPool({
 
 const user = require('./routes/user.js');
 const userstats = require('./routes/userstats.js');
+const gauntlet = require('./routes/gauntlet.js');
 app.use('/user', user);
 app.use('/userstats', userstats);
-//app.use('/gauntlet', gauntlet)
+app.use('/gauntlet', gauntlet)
 
 module.exports = app;
