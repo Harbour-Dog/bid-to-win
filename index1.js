@@ -1,5 +1,9 @@
-//Gauntlet setup correctly as far as being ready to click 'newround'
-
+var clickSignIn = document.getElementById('Password');
+input.addEventListener('keyup', function(event) {
+  if (event.keyCode === 13) {
+    document.getElementById('logbtn').click();
+  }
+});
 
 let oppbid1, oppbid2, oppbid1Adj, oppbid2Adj;
 let yourbid1, yourbid2;
