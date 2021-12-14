@@ -1,5 +1,5 @@
-var clickSignIn = document.getElementById('Password');
-input.addEventListener('keyup', function(event) {
+let clickSignIn = document.getElementById('Password');
+clickSignIn.addEventListener('keyup', function(event) {
   if (event.keyCode === 13) {
     document.getElementById('logbtn').click();
   }
