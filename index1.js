@@ -935,6 +935,7 @@ function gauntletGetField(){
         .then(result => {
             obj = result.data[0];
             if (obj.msg == null){//obj.Count may not be right
+                console.log(obj);
                 field = obj.Count;
             } else {
                 loginFail();
@@ -964,7 +965,7 @@ function gauntletGetComps(){
         });
 }
 
-function gauntletStatDisplay(){
+function gauntletStatDisplay(){///this is where we are. field, percentile, and proper grammar need to be inserted
     blankInnerHTML('rulespar', 'lossesranklabel', 'tiesranklabel', 'absranklabel', 'winperranklabel');
     document.getElementById("userhead").innerHTML = user;
     document.getElementById('gpranklabel').innerHTML = 'Rank'
