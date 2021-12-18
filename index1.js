@@ -614,14 +614,14 @@ function playComp(){
     yourcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     //the following is to be toggled on when gauntlet is working
-    document.getElementById("playcomp").value = 'Normal Mode';
-    document.getElementById("playcomp").onclick = normComp;
-    document.getElementById("play2p").value = 'Gauntlet Mode';
-    document.getElementById("play2p").onclick = theGauntlet;
+    // document.getElementById("playcomp").value = 'Normal Mode';
+    // document.getElementById("playcomp").onclick = normComp;
+    // document.getElementById("play2p").value = 'Gauntlet Mode';
+    // document.getElementById("play2p").onclick = theGauntlet;
 
     //the following is to be removed when gaunlet is working
-    // btnDisabler('playcomp', 'play2p');
-    // btnEnabler('newround');
+    btnDisabler('playcomp', 'play2p');
+    btnEnabler('newround');
 }
 
 function normComp(){
