@@ -614,14 +614,14 @@ function playComp(){
     yourcards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     //the following is to be toggled on when gauntlet is working
-    // document.getElementById("playcomp").value = 'Normal Mode';
-    // document.getElementById("playcomp").onclick = normComp;
-    // document.getElementById("play2p").value = 'Gauntlet Mode';
-    // document.getElementById("play2p").onclick = theGauntlet;
+    document.getElementById("playcomp").value = 'Normal Mode';
+    document.getElementById("playcomp").onclick = normComp;
+    document.getElementById("play2p").value = 'Gauntlet Mode';
+    document.getElementById("play2p").onclick = theGauntlet;
 
     //the following is to be removed when gaunlet is working
-    btnDisabler('playcomp', 'play2p');
-    btnEnabler('newround');
+    // btnDisabler('playcomp', 'play2p');
+    // btnEnabler('newround');
 }
 
 function normComp(){
@@ -933,10 +933,9 @@ function gauntletGetField(){
     fetch(baseURL)
         .then(response => response.json())
         .then(result => {
-            obj = result.data[0];
+            console.log(result.data);
             if (obj.msg == null){//obj.Count may not be right
-                console.log(obj);
-                field = obj.Count;
+                field = result.data;
             } else {
                 loginFail();
                 blankInnerHTML('rulespar');
@@ -954,7 +953,7 @@ function gauntletGetComps(){
         .then(result => {
             obj = result.data[0];
             if (obj.msg == null){//obj.Count may not be right
-                comps = obj.Count;
+                comps = obj.length;
                 percentile = [(field - comps) * 100 / field];
                 gauntletStatDisplay();
             } else {
@@ -966,33 +965,37 @@ function gauntletGetComps(){
 }
 
 function gauntletStatDisplay(){///this is where we are. field, percentile, and proper grammar need to be inserted
-    blankInnerHTML('rulespar', 'lossesranklabel', 'tiesranklabel', 'absranklabel', 'winperranklabel');
+    let gauntrank = comps + 1;
+    
+    blankInnerHTML('rulespar', 'tiesranklabel', 'absranklabel', 'winperranklabel');
     document.getElementById("userhead").innerHTML = user;
-    document.getElementById('gpranklabel').innerHTML = 'Rank'
-    document.getElementById('winsranklabel').innerHTML = 'Percentile'
+    document.getElementById('gpranklabel').innerHTML = 'Wins';
+    document.getElementById('winsranklabel').innerHTML = 'Ranks';
+    document.getElementById('lossesranklabel').innerHTML = 'Percentile';
+    document.getElementById('gpdisp').innerHTML = gauntwin;
 
-    if(obj.Count > 10 && obj.Count < 14){// this doesn't currently deal the teens in the hundreds correctly//
-        document.getElementById('gpdisp').innerHTML = obj.Count+'th';
+    if(gauntrank > 10 && gauntrank < 14){// this doesn't currently deal the teens in the hundreds correctly//
+        document.getElementById('gpdisp').innerHTML = gauntrank+'th';
     } else if (rem == 1){
-        document.getElementById('gpdisp').innerHTML = obj.Count+'st';
+        document.getElementById('winsdisp').innerHTML = gauntrank+'st';
     } else if (rem == 2){
-        document.getElementById('gpdisp').innerHTML = obj.Count+'nd';
+        document.getElementById('winsdisp').innerHTML = gauntrank+'nd';
     } else if (rem == 3){
-        document.getElementById('gpdisp').innerHTML = obj.Count+'rd';
+        document.getElementById('winsdisp').innerHTML = gauntrank+'rd';
     } else {
-        document.getElementById('gpdisp').innerHTML = obj.Count+'th';
+        document.getElementById('winsdisp').innerHTML = obj.Count+'th';
     }
 
-    if(obj.Count > 10 && obj.Count < 14){// this doesn't currently deal the teens in the hundreds correctly//
-        document.getElementById('winsdisp').innerHTML = obj.Count+'th';
+    if(percentile > 10 && percentile < 14){// this doesn't currently deal the teens in the hundreds correctly//
+        document.getElementById('lossesdisp').innerHTML = percentile+'th';
     } else if (rem == 1){
-        document.getElementById('winsdisp').innerHTML = obj.Count+'st';
+        document.getElementById('lossesdisp').innerHTML = percentile+'st';
     } else if (rem == 2){
-        document.getElementById('winsdisp').innerHTML = obj.Count+'nd';
+        document.getElementById('lossesdisp').innerHTML = percentile+'nd';
     } else if (rem == 3){
-        document.getElementById('winsdisp').innerHTML = obj.Count+'rd';
+        document.getElementById('lossesdisp').innerHTML = percentile+'rd';
     } else {
-        document.getElementById('winsdisp').innerHTML = obj.Count+'th';
+        document.getElementById('lossesdisp').innerHTML = percentile+'th';
     }
     
     document.getElementById("statdisplay").style.display = "inline-flex";
