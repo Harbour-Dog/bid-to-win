@@ -933,9 +933,11 @@ function gauntletGetField(){
     fetch(baseURL)
         .then(response => response.json())
         .then(result => {
-            console.log(result.data);
+            let temp = result.data[0];
+            console.log(result.data[0]);
+            console.log(temp.COUNT);
             if (obj.msg == null){//obj.Count may not be right
-                field = result.data;
+                field = result.data[0].COUNT;
             } else {
                 loginFail();
                 blankInnerHTML('rulespar');
