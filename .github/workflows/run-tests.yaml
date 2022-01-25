@@ -33,5 +33,5 @@ jobs:
     - name: Run tests
       run: npm test
       env:
-        USER: root
-        PORT: ${{ env.PORT }}
+        RDS_USERNAME: root
+        RDS_PORT: ${{ env.PORT }}
