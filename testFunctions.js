@@ -6,10 +6,10 @@ require('dotenv').config();
 // const db = app.db;
 
 const db = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
+    host: process.env.RDS_HOSTNAME,
+    user: process.env.RDS_USERNAME,
+    password: process.env.RDS_PASSWORD,
+    database: process.env.RDS_DB_NAME
 });
 
 //our generic query that we can map with an array of required queries for testing//
@@ -24,7 +24,7 @@ const queryDatabase = (query) => new Promise ((resolve, reject) => {
 })
 
 async function setup(addUsers){
-    if (process.env.DATABASE === 'testdb'){
+    if (process.env.RDS_DB_NAME === 'testdb'){
         await Promise.all([sqlVar.createBaseTable, sqlVar.createTable, addUsers, sqlVar.renameOrgTable, sqlVar.renameTestTable].map(queryDatabase));
     } else {
         await Promise.all([sqlVar.createTable, addUsers, sqlVar.renameOrgTable, sqlVar.renameTestTable].map(queryDatabase));
@@ -32,7 +32,7 @@ async function setup(addUsers){
 }
 
 async function breakdown(){
-    if (process.env.DATABASE === 'testdb'){
+    if (process.env.RDS_DB_NAME === 'testdb'){
         await Promise.all([sqlVar.dropBaseTable, sqlVar.dropTable].map(queryDatabase));
         db.end();
     } else {

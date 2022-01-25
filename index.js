@@ -32,8 +32,8 @@ app.use('/user_stats', userstats); //deals with fetching user and leaderboard st
 app.use('/user', user); //deals with logging in and updating user stats during games
 console.log('in '+app.settings.env+' mode');
 
-app.listen(process.env.PORT || 31801, () => {
-    console.log('Listening on Port '+ process.env.PORT);
+app.listen(process.env.RDS_PORT || 31801, () => {
+    console.log('Listening on Port '+ process.env.RDS_PORT);
 });
 
 //Removes user from database. NOT YET IMPLEMENTED//

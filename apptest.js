@@ -9,10 +9,10 @@ app.use(express.urlencoded({extended: true}));
 const mysql = require('mysql2');
 
 const db = mysql.createPool({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
+    host: process.env.RDS_HOSTNAME,
+    user: process.env.RDS_USERNAME,
+    password: process.env.RDS_PASSWORD,
+    database: process.env.RDS_DB_NAME
 });
 
 const user = require('./routes/user.js');

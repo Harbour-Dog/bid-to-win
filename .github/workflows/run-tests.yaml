@@ -1,10 +1,10 @@
 name: Node.js CI
 
 env:
-  HOST: localhost
-  PASSWORD: password
-  DATABASE: testdb
-  PORT: 3306
+  RDS_HOSTNAME: localhost
+  RDS_PASSWORD: password
+  RDS_DB_NAME: testdb
+  RDS_PORT: 3306
   NODE_ENV: test
 
 on:

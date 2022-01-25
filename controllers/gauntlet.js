@@ -6,10 +6,10 @@ require('dotenv').config();
 
 const fetch = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE
+        host: process.env.RDS_HOSTNAME,
+        user: process.env.RDS_USERNAME,
+        password: process.env.RDS_PASSWORD,
+        database: process.env.RDS_DB_NAME
     });
 
     let sql = 'SELECT * FROM gauntlet_stats WHERE Username=?';
@@ -26,10 +26,10 @@ const fetch = (req, res, next) => {
 
 const create = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE
+        host: process.env.RDS_HOSTNAME,
+        user: process.env.RDS_USERNAME,
+        password: process.env.RDS_PASSWORD,
+        database: process.env.RDS_DB_NAME
     });
 
     let sql = 'INSERT INTO gauntlet_stats (Username, Wins, Losses, AvgWins, Abandons)' + 
@@ -47,10 +47,10 @@ const create = (req, res, next) => {
 
 const gameLog = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE
+        host: process.env.RDS_HOSTNAME,
+        user: process.env.RDS_USERNAME,
+        password: process.env.RDS_PASSWORD,
+        database: process.env.RDS_DB_NAME
     });
 
     let sql = 'INSERT INTO gauntlet_runs (Username, Wins)' + 
@@ -68,10 +68,10 @@ const gameLog = (req, res, next) => {
 
 const record = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE
+        host: process.env.RDS_HOSTNAME,
+        user: process.env.RDS_USERNAME,
+        password: process.env.RDS_PASSWORD,
+        database: process.env.RDS_DB_NAME
     });
 
     let sql = 'UPDATE gauntlet_stats SET Wins=?, Losses=?, AvgWins=?, Abandons=Abandons-1 WHERE Username=?';
@@ -88,10 +88,10 @@ const record = (req, res, next) => {
 
 const start = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE
+        host: process.env.RDS_HOSTNAME,
+        user: process.env.RDS_USERNAME,
+        password: process.env.RDS_PASSWORD,
+        database: process.env.RDS_DB_NAME
     });
 
     let sql = 'UPDATE gauntlet_stats SET Attempts=Attempts+1, Abandons=Abandons+1 WHERE Username=?';
@@ -108,10 +108,10 @@ const start = (req, res, next) => {
 
 const tempClear = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE
+        host: process.env.RDS_HOSTNAME,
+        user: process.env.RDS_USERNAME,
+        password: process.env.RDS_PASSWORD,
+        database: process.env.RDS_DB_NAME
     });
 
     let sql = 'UPDATE gauntlet_temp SET Wins=0, Losses=0 WHERE Username=?'
@@ -128,10 +128,10 @@ const tempClear = (req, res, next) => {
 
 const tempCreate = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE
+        host: process.env.RDS_HOSTNAME,
+        user: process.env.RDS_USERNAME,
+        password: process.env.RDS_PASSWORD,
+        database: process.env.RDS_DB_NAME
     });
 
     let sql = 'INSERT INTO gauntlet_temp (Username, Wins, Losses) VALUES (?, 0, 0)';
@@ -148,10 +148,10 @@ const tempCreate = (req, res, next) => {
 
 const tempRecord = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE
+        host: process.env.RDS_HOSTNAME,
+        user: process.env.RDS_USERNAME,
+        password: process.env.RDS_PASSWORD,
+        database: process.env.RDS_DB_NAME
     });
 
     let sql = 'UPDATE gauntlet_temp SET Wins=?, Losses=? WHERE Username=?';
@@ -168,10 +168,10 @@ const tempRecord = (req, res, next) => {
 
 const runs = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE
+        host: process.env.RDS_HOSTNAME,
+        user: process.env.RDS_USERNAME,
+        password: process.env.RDS_PASSWORD,
+        database: process.env.RDS_DB_NAME
     });
 
     let sql = 'INSERT INTO gauntlet_runs (Username, Wins) VALUES (?, ?)';
@@ -188,10 +188,10 @@ const runs = (req, res, next) => {
 
 const runCount = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE
+        host: process.env.RDS_HOSTNAME,
+        user: process.env.RDS_USERNAME,
+        password: process.env.RDS_PASSWORD,
+        database: process.env.RDS_DB_NAME
     });
 
     let sql = 'SELECT COUNT(*) FROM gauntlet_runs';
@@ -208,10 +208,10 @@ const runCount = (req, res, next) => {
 
 const runStats = (req, res, next) => {
     let db = mysql.createPool({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE
+        host: process.env.RDS_HOSTNAME,
+        user: process.env.RDS_USERNAME,
+        password: process.env.RDS_PASSWORD,
+        database: process.env.RDS_DB_NAME
     });
 
     let sql = 'SELECT * FROM gauntlet_runs WHERE Wins > ?';
