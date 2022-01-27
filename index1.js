@@ -3,8 +3,6 @@
 // STAT FETCH WORKS - NEED BETTER DISPLAY
 // DARKEN COMPBUTTONS SOME
 
-require('dotenv').config();
-
 let clickSignIn = document.getElementById('Password');
 clickSignIn.addEventListener('keyup', function(event) {
   if (event.keyCode === 13) {
@@ -40,6 +38,7 @@ let csum = 0;
 let ysum = 0;
 
 // variables specific to retrieving/displaying user data //
+let seturl = 'http://bidtowin709-env-2.eba-ku8nwney.us-east-1.elasticbeanstalk.com';
 let data =[];
 let ranknum = ['gprank', 'winsrank', 'winperrank'];
 let statrank;
@@ -120,7 +119,7 @@ function gameReset(){
 function userRanks(){
     statrank = ranknum.shift();
 
-    baseURL2 = `${process.env.RDS_HOSTNAME}/user_stats/1.0.0/${statrank}/:Username?Username=${user}`
+    baseURL2 = `${seturl}/user_stats/1.0.0/${statrank}/:Username?Username=${user}`
     fetch(baseURL2)
     .then(response => response.json())
     .then(result => {
@@ -152,7 +151,7 @@ function userRanks(){
 }
 
 function gameStart(){
-    const baseURL = `${process.env.RDS_HOSTNAME}https://bid-to-win.herokuapp.com/user/1.0.0/game_started`;
+    const baseURL = `${seturl}https://bid-to-win.herokuapp.com/user/1.0.0/game_started`;
         fetch(baseURL, {
             method: 'PUT',
             headers: {
@@ -167,7 +166,7 @@ function gameStart(){
 
 function gauntletStart(){
     attempt++
-    const baseURL = `${process.env.RDS_HOSTNAME}/gauntlet/1.0.0/start`;
+    const baseURL = `${seturl}/gauntlet/1.0.0/start`;
         fetch(baseURL, {
             method: 'PUT',
             headers: {
@@ -183,7 +182,7 @@ function gauntletStart(){
 }
 
 function gauntletTempClear(){
-    const baseURL = `${process.env.RDS_HOSTNAME}/gauntlet/1.0.0/temp/clear`;
+    const baseURL = `${seturl}/gauntlet/1.0.0/temp/clear`;
         fetch(baseURL, {
             method: 'PUT',
             headers: {
@@ -199,7 +198,7 @@ function gauntletTempClear(){
 function userWin(){
     wins++
     winper = Math.round(((wins)*100)/(wins + losses));
-    const baseURL = `${process.env.RDS_HOSTNAME}/user/1.0.0/win`;
+    const baseURL = `${seturl}/user/1.0.0/win`;
     fetch(baseURL, {
         method: 'PUT',
         headers: {
@@ -216,7 +215,7 @@ function userWin(){
 function userLoss(){
     losses++
     winper = Math.round((wins * 100)/(wins + losses));
-    const baseURL = `${process.env.RDS_HOSTNAME}/user/1.0.0/loss`;
+    const baseURL = `${seturl}/user/1.0.0/loss`;
     fetch(baseURL, {
         method: 'PUT',
         headers: {
@@ -237,7 +236,7 @@ function userTie(){
     } else {
         winper = 0;
     }
-    const baseURL = `${process.env.RDS_HOSTNAME}/user/1.0.0/tie`;
+    const baseURL = `${seturl}/user/1.0.0/tie`;
     fetch(baseURL, {
         method: 'PUT',
         headers: {
@@ -317,7 +316,7 @@ function gauntletRecorder(){
 }
 
 function gauntletTempRecord(){
-    const baseURL = `${process.env.RDS_HOSTNAME}/gauntlet/1.0.0/temp/record`; 
+    const baseURL = `${seturl}/gauntlet/1.0.0/temp/record`; 
     fetch(baseURL, {
         method: 'PUT',
         headers: {
@@ -391,7 +390,7 @@ function signIn(){
     key = document.getElementById("Password").value;
     btnEnabler('playcomp', 'play2p', 'viewlead');
 
-    const baseURL = `${process.env.RDS_HOSTNAME}/user/1.0.0/:Username/:Password?Username=${user}&Password=${key}`;
+    const baseURL = `${seturl}/user/1.0.0/:Username/:Password?Username=${user}&Password=${key}`;
     fetch(baseURL)
         .then(response => response.json())
         .then(result => {
@@ -422,7 +421,7 @@ function newUser(){
     user = document.getElementById("Username").value;
     key = document.getElementById("Password").value;
 
-    const baseURL = `${process.env.RDS_HOSTNAME}/user/1.0.0/create`;
+    const baseURL = `${seturl}/user/1.0.0/create`;
     fetch(baseURL, {
         method: 'POST',
         headers: {
@@ -473,7 +472,7 @@ function nowLogin(){
 }
 
 function gauntletLogin(){
-    const baseURL = `${process.env.RDS_HOSTNAME}/gauntlet/1.0.0/:Username?Username=${user}`;
+    const baseURL = `${seturl}/gauntlet/1.0.0/:Username?Username=${user}`;
     fetch(baseURL)
         .then(response => response.json())
         .then(result => {
@@ -493,7 +492,7 @@ function gauntletLogin(){
 }
 
 function gauntletNewUser(){//adds user to gauntlet_stats
-    const baseURL = `${process.env.RDS_HOSTNAME}/gauntlet/1.0.0/create`;
+    const baseURL = `${seturl}/gauntlet/1.0.0/create`;
     fetch(baseURL, {
         method: 'POST',
         headers: {
@@ -508,7 +507,7 @@ function gauntletNewUser(){//adds user to gauntlet_stats
 }
 
 function gauntletNewTemp(){ //adds new user to gauntlet_temp
-    const baseURL = `${process.env.RDS_HOSTNAME}/gauntlet/1.0.0/temp/create`;
+    const baseURL = `${seturl}/gauntlet/1.0.0/temp/create`;
     fetch(baseURL, {
         method: 'POST',
         headers: {
@@ -562,8 +561,10 @@ function leaderboard(){
     document.getElementById("rulebtn").style.color = "black";
     document.getElementById("userstats").innerHTML = "User Stats";
 
-    const baseURL = `${process.env.RDS_HOSTNAME}/user_stats/1.0.0/leaderboard`;
-    fetch(baseURL)
+    const baseURL = `${seturl}/user_stats/1.0.0/leaderboard`;
+    fetch(baseURL, {
+        mode: 'no-cors'
+    })
         .then(response => response.json())
         .then(result => {
             for (i = 0; i < 10 && i < result.data.length; i++){
@@ -915,7 +916,7 @@ function strike(){
 }
 
 function gauntletResults(){// first gauntlet_runs, then gauntlet_stats, then return rankings maybe?
-    const baseURL = `${process.env.RDS_HOSTNAME}/gauntlet/1.0.0/runs`;
+    const baseURL = `${seturl}/gauntlet/1.0.0/runs`;
     fetch(baseURL, {
         method: 'POST',
         headers: {
@@ -931,7 +932,7 @@ function gauntletResults(){// first gauntlet_runs, then gauntlet_stats, then ret
 }
 
 function gauntletGetField(){
-    const baseURL = `${process.env.RDS_HOSTNAME}/gauntlet/1.0.0/runs/count`;
+    const baseURL = `${seturl}/gauntlet/1.0.0/runs/count`;
     fetch(baseURL)
         .then(response => response.json())
         .then(result => {
@@ -950,7 +951,7 @@ function gauntletGetField(){
 }
 
 function gauntletGetComps(){
-    const baseURL = `${process.env.RDS_HOSTNAME}/gauntlet/1.0.0/runs/stats`;
+    const baseURL = `${seturl}/gauntlet/1.0.0/runs/stats`;
     fetch(baseURL)
         .then(response => response.json())
         .then(result => {
